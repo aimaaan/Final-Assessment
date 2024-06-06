@@ -1,0 +1,70 @@
+body {
+  background-color: cornflowerblue;
+}
+
+.flexbox-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: cornflowerblue;
+}
+
+.flexbox-main {
+  margin: 20px;
+  text-align: center;
+}
+
+.flexbox {
+
+  height: 300px;
+  width: 300px;
+  margin: 30px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+}
+
+.title-page {
+  padding-top: 50px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 50px;
+  color: white;
+}
+
+.sub-title {
+  padding-top: 20px;
+  text-align: center;
+  margin: 30px;
+}
+
+.main-content {
+  width: 900px;
+  letter-spacing: 2px;
+  color: white;
+  text-align: center;
+  line-height: 30px;
+  font-weight: normal;
+}
+
+.content {
+  padding-top: 20vh;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.flexbox:hover {
+  transition: all 0.5s ease;
+  transform: scale(1.2);
+}
+
+.hotel-video-box{
+  margin-top: 60px ;
+}
+
+video{
+  width: 800px;
+  border-radius: 10px;
+}
