@@ -1,0 +1,73 @@
+body {
+  background-color: cornflowerblue;
+}
+
+.flexbox-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 30px;
+}
+
+.flexbox-main {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  justify-content: space-evenly;
+}
+
+.box {
+  width: 500px;
+  height: 150px;
+  border-radius: 10px;
+  background-color: white;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.b1 {
+  height: 65px;
+}
+
+iframe {
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.title-page {
+  text-align: center;
+  color: white;
+  font-size: 50px;
+  font-weight: bold;
+  padding: 30px;
+}
+
+.contact-label {
+  font-size: 25px;
+  color: white;
+}
+
+.content {
+  padding-top: 20px;
+  padding-left: 15px;
+  letter-spacing: 2px;
+  
+}
+
+.box-icon {
+  display: flex;
+  margin-top: 15px;
+  justify-content: center;
+}
+
+.icon .fas,
+.fab {
+  margin: 20px;
+  color: cornflowerblue;
+}
+
+.icon:hover {
+  border-radius: 10px;
+  transform: scale(1.3);
+}

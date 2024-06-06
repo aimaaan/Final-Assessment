@@ -1,0 +1,80 @@
+body {
+  background-color: cornflowerblue;
+}
+
+.flexbox-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.flexbox {
+  margin: 30px;
+  width: 350px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.flexbox-content{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.main-content {
+  width: 900px;
+  letter-spacing: 2px;
+  color: white;
+  text-align: center;
+  line-height: 30px;
+  font-weight: normal;
+   margin-bottom: 30px; 
+}
+
+.flexbox:hover {
+  transition: all 0.5s ease;
+  transform: scale(1.1);
+}
+
+.image {
+  margin: 20px;
+  height: 250px;
+  border-radius: 10px;
+  background-color: black;
+  background-size: cover;
+}
+
+.page-title {
+  padding: 30px;
+  text-align: center;
+  font-size: 50px;
+  color: white;
+}
+
+.sub-title {
+  text-align: center;
+}
+
+.content {
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.img1 {
+  background-image: url("https://portozante.com/images/uploads/2015_slideshow_images/Porto-Zante-Villas-and-Spa-Imperial-Spa-Villa-1400pxls-Dec2019-jpeg.jpg");
+}
+
+.img2 {
+  background-image: url("https://s7d2.scene7.com/is/image/ritzcarlton/RCBAHRA_00256-3?$XlargeViewport100pct$");
+}
+
+.img3 {
+  background-image: url("http://www.shangri-la.com/uploadedImages/Shangri-la_Hotels/Edsa_Shangri-La,_Manila/health-leisure/health-club/ESL_Health-Club-1.jpg?width=720&height=283&mode=crop&quality=80.jpg");
+}
+
+.img4 {
+  background-image: url("https://i.pinimg.com/originals/67/9b/39/679b398e6e0c6d7463ca8b606478583a.jpg");
+}
+
+
