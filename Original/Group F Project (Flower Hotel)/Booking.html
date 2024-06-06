@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="Styles/NavigationBar.css">
+    <link rel="stylesheet" href="Styles/Booking_style.css">
+    <script src="Javascript/Book.js"></script>
+    <script src="Javascript/onoffline.js"></script>
+     <script src="Javascript/Hide_form.js"></script>
+
+</head>
+<body ononline="onFunction()" onoffline="offFunction()">
+
+    <nav>
+        <a class="logo-link" href="Index.html">
+        <nav class="nav-container">
+          <div class="logo-container">
+            <img class="logo-img" src="Image/Hotel logo.png" />
+            <h4>Flower Hotel</h4>
+          </div></a>
+  
+          <input type="checkbox" id="click" />
+          <label for="click" class="menu-btn">
+            <i class="fas fa-bars"></i>
+          </label>
+    
+          <ul class="list-link-container">
+            <li><a class="pasive" href="Index.html">Home</a></li>
+            <li><a class="active" href="Booking.html">Booking</a></li>
+            <li><a class="pasive" href="Room.html">Room</a></li>
+            <li><a class="pasive" href="Facility.html">Facility</a></li>
+            <li><a class="pasive" href="About Us.html">About Us</a></li>
+            <li><a class="pasive" href="Contact.html">Contact Us</a></li>
+          </ul>
+        </nav>
+
+    <div class="container-title">Booking</div>
+
+    <div class="flexbox-container">
+      <h4 class="main-content">
+      <strong>FLOWER HOTEL 4-STAR HOTEL IN GOMBAK CITY , KUALA LUMPUR </strong> <br>
+         FLOWER Hotel makes up one of the trifecta of hotels within Gombak City, 
+         offering greenest scenery ever to the customer with the great facilities 
+         that always been take care by our staffs. These include the East Mall 
+         and Melawati shopping Mall.With the added facilities and various event
+          venues located within walking distance, FLOWER Hotel is ideal for guests 
+          travelling both for honeymoon and leisure. <br> <br> <strong> Come and join us.</strong> <br>Press the button below.
+      </h4>
+    </div>
+    
+    <div class="button-container">
+        <button id="more">Book Now</button>
+    </div>
+
+<div class="body">  
+    <div class="container">
+        <div class="content">
+        <form action="#" id="form">
+            <div class="user_details">
+
+        <div class="input_box">
+            <label for="fname">First Name :</label>
+            <input type="text" name="fname" id="fname">
+        </div>
+
+        <div class="input_box">
+            <label for="lname">Last Name :</label> 
+            <input type="text" name="lname" id="lname">
+        </div>
+       
+        <div class="input_box">
+            <label for="pnumber">Phone no. :</label>
+            <input type="text" name="pnumber" id="pnumber">
+        </div> 
+
+        <div class="input_box">
+            <label for="email">Email :</label>
+            <input type="text" name="email" id="email">
+        </div> 
+
+        <div class="input_box">        
+            <label for="cin">Check-in :</label>
+            <input type="date" name="cin" id="cin">
+        </div>
+
+        <div class="input_box">
+            <label for="cout">Check-out :</label>
+            <input type="date" name="cout" id="cout">
+        </div> 
+
+        <div class="input_box">
+            <label for="adult">No. adult :</label>
+            <input type="number" name="adult" id="adult">
+         </div>
+         
+         <div class="input_box">
+            <label for="children">No. children :</label>
+            <input type="number" name="children" id="children">
+        </div>
+
+        </div>
+        
+        <div class="button" onclick="Book_Alert()">
+            <input type="submit" value="Book">
+          </div>
+       
+        </form>
+        </div>
+        </div>
+    </div>
+</div>
+<script src="https://kit.fontawesome.com/57086d82eb.js" crossorigin="anonymous"></script>
+</body>
+</html>
