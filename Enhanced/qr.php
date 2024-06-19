@@ -41,7 +41,7 @@ $qrCode = QrCode::create($google2fa_url)
     ->setSize(300)
     ->setMargin(10);
 
-$qrCodeImage = $writer->writeDataUri($qrCode);
+$qrCodeImage = $writer->write($qrCode);
 ?>
 
 <!DOCTYPE html>
@@ -56,9 +56,9 @@ $qrCodeImage = $writer->writeDataUri($qrCode);
     <div class="container">
         <h2>Setup Two-Factor Authentication</h2>
         <p>Scan the QR code below with your Google Authenticator app:</p>
-        <img src="<?php echo $qrCodeImage; ?>" alt="QR Code">
+        <img src="data:image/png;base64,<?php echo base64_encode($qrCodeImage->getString()); ?>" alt="QR Code">
         <p>Then enter the generated code below to complete the setup.</p>
-        <form action="verify_2fa_setup.php" method="POST">
+        <form action="qr_verify.php" method="POST">
             <input type="text" name="google2fa_code" placeholder="2FA Code" required>
             <button type="submit">Verify</button>
         </form>
