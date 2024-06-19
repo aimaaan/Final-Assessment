@@ -3,6 +3,7 @@ require 'db.php';
 require 'vendor/autoload.php';
 use PragmaRX\Google2FA\Google2FA;
 use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
 
 session_start();
 
@@ -35,12 +36,12 @@ $google2fa_url = $google2fa->getQRCodeUrl(
     $google2fa_secret
 );
 
-$qrCode = new QrCode($google2fa_url);
-$qrCode->setSize(300);
-$qrCode->setMargin(10);
+$writer = new PngWriter();
+$qrCode = QrCode::create($google2fa_url)
+    ->setSize(300)
+    ->setMargin(10);
 
-$qrCodeImage = $qrCode->writeDataUri();
-
+$qrCodeImage = $writer->writeDataUri($qrCode);
 ?>
 
 <!DOCTYPE html>
