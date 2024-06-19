@@ -38,18 +38,29 @@ $qrCodeUrl = GoogleQrUrl::generate($_SESSION['username'], $google2fa_secret, 'Fl
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Setup 2FA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Setup Two-Factor Authentication</h2>
-        <p>Scan the QR code below with your Google Authenticator app:</p>
-        <img src="<?php echo $qrCodeUrl; ?>" alt="QR Code">
-        <p>Then enter the generated code below to complete the setup.</p>
-        <form action="qr_verify.php" method="POST">
-            <input type="text" name="google2fa_code" placeholder="2FA Code" required>
-            <button type="submit">Verify</button>
-        </form>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center">Setup Two-Factor Authentication</h2>
+                <p class="text-center">Scan the QR code below with your Google Authenticator app:</p>
+                <div class="text-center">
+                    <img src="<?php echo $qrCodeUrl; ?>" alt="QR Code" class="img-fluid">
+                </div>
+                <p class="text-center mt-3">Then enter the generated code below to complete the setup.</p>
+                <form action="qr_verify.php" method="POST">
+                    <div class="mb-3">
+                        <label for="google2fa_code" class="form-label">2FA Code:</label>
+                        <input type="text" name="google2fa_code" class="form-control" id="google2fa_code" placeholder="Enter 2FA Code" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Verify</button>
+                </form>
+            </div>
+        </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
