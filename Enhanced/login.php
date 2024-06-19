@@ -1,7 +1,7 @@
 <?php
 require 'db.php';
 require 'vendor/autoload.php';
-use PragmaRX\Google2FA\Google2FA;
+use Sonata\GoogleAuthenticator\GoogleAuthenticator;
 
 session_start();
 
@@ -17,10 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user['password'])) {
-        $google2fa = new Google2FA();
+        $google2fa = new GoogleAuthenticator();
 
         // Verify the 2FA code
-        if ($google2fa->verifyKey($user['google2fa_secret'], $google2fa_code)) {
+        if ($google2fa->checkCode($user['google2fa_secret'], $google2fa_code)) {
             // Start session and store user information
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $user['id'];
@@ -32,3 +32,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo 'Invalid username or password';
     }
 }
+?>

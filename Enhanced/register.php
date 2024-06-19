@@ -1,7 +1,10 @@
 <?php
 require 'db.php';
 require 'vendor/autoload.php';
-use PragmaRX\Google2FA\Google2FA;
+use Sonata\GoogleAuthenticator\GoogleAuthenticator;
+use Sonata\GoogleAuthenticator\GoogleQrUrl;
+
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = trim($_POST['username']);
@@ -17,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Generate 2FA secret
-    $google2fa = new Google2FA();
-    $google2fa_secret = $google2fa->generateSecretKey();
+    $google2fa = new GoogleAuthenticator();
+    $google2fa_secret = $google2fa->generateSecret();
 
     try {
         // Insert user into the users table
@@ -45,6 +48,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo 'Registration failed: ' . $e->getMessage();
     }
 }
-
-
-
