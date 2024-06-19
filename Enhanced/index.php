@@ -65,6 +65,7 @@ if (isset($_SESSION['username'])) {
                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$" 
                         required><br>
                     
+                    <input type="text" name="google2fa_code" placeholder="2FA Code" required>
                     <button type="submit" name="login" id="login" class="btn btn-primary w-100">Login</button>
                     <p class="mt-3 text-center">Don't have an account? <a href="registration.php">Sign up</a></p>
                 </form>
