@@ -7,10 +7,18 @@ namespace Composer\Autoload;
 class ComposerStaticInit5003a2117afcbf320b8eb083135ed3f5
 {
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Sonata\\GoogleAuthenticator\\' => 27,
+        ),
         'P' => 
         array (
             'PragmaRX\\Google2FA\\' => 19,
             'ParagonIE\\ConstantTime\\' => 23,
+        ),
+        'G' => 
+        array (
+            'Google\\Authenticator\\' => 21,
         ),
         'E' => 
         array (
@@ -27,6 +35,10 @@ class ComposerStaticInit5003a2117afcbf320b8eb083135ed3f5
     );
 
     public static $prefixDirsPsr4 = array (
+        'Sonata\\GoogleAuthenticator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/google-authenticator/src',
+        ),
         'PragmaRX\\Google2FA\\' => 
         array (
             0 => __DIR__ . '/..' . '/pragmarx/google2fa/src',
@@ -34,6 +46,10 @@ class ComposerStaticInit5003a2117afcbf320b8eb083135ed3f5
         'ParagonIE\\ConstantTime\\' => 
         array (
             0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
+        ),
+        'Google\\Authenticator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/google-authenticator/src',
         ),
         'Endroid\\QrCode\\' => 
         array (
