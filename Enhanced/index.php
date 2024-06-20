@@ -1,9 +1,12 @@
 <?php
 session_start();
 if (isset($_SESSION['username'])) {
-    header('Location: index.php');
+    header('Location: main.php');
     exit();
 }
+
+$error_message = isset($_SESSION['error']) ? $_SESSION['error'] : '';
+unset($_SESSION['error']);
 ?>
 
 <!DOCTYPE html>
@@ -18,11 +21,26 @@ if (isset($_SESSION['username'])) {
     <link rel="stylesheet" href="styles/style.css" />
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+e/JpG/6ne0xZKI9M/lg5vLa5k8mN" crossorigin="anonymous"></script>
     <script src="javascript/validation.js"></script>
 </head>
 
 <body>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var errorMessage = '<?php echo $error_message; ?>';
+            if (errorMessage) {
+                var alertPlaceholder = document.getElementById('alertPlaceholder');
+                var wrapper = document.createElement('div');
+                wrapper.innerHTML = '<div class="alert alert-danger alert-dismissible" role="alert">' + 
+                                    errorMessage + 
+                                    '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                alertPlaceholder.append(wrapper);
+            }
+        });
+    </script>
+
     <section>
         <nav class="nav-container">
             <div class="logo-container">
@@ -42,10 +60,7 @@ if (isset($_SESSION['username'])) {
             
             <div class="flexbox f2">
                 <h1 class="title-logo">Log In</h1><br>
-                <?php if (isset($_SESSION['error'])): ?>
-                    <p class="text-danger"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></p>
-                <?php endif; ?>
-                
+                <div id="alertPlaceholder"></div>
                 <form action="login.php" method="POST" onsubmit="return validateForm()">
                     <label for="username">Username:</label>
                     <input 
