@@ -40,10 +40,10 @@
                 
                 <form name="signupForm" action="register.php" method="POST" onsubmit="return validateForm()">
                     <label for="username">Username:</label>
-                    <input type="text" name="username" class="form-control" id="username" pattern="[a-zA-Z0-9_]{3,20}$" required><br>
+                    <input type="text" name="username" class="form-control" id="username" pattern="[a-zA-Z0-9_]{3,20}$" autocomplete="off" required><br>
                     
                     <label for="password">Password:</label>
-                    <input type="password" name="password" class="form-control" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$" required><br>
+                    <input type="password" name="password" class="form-control" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$" autocomplete="off" required><br>
 
                     <label for="role">Role:</label>
                     <select name="role" id="role" class="form-control" required>
