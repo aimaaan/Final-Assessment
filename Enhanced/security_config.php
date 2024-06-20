@@ -35,7 +35,7 @@ function startSecureSession() {
 //Implement CSP
 function setCSP() {
     $csp = "Content-Security-Policy: default-src 'self';" .
-           " script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;" .
+           " script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js;" .
            " object-src 'none';" .
            " style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com;" .
            " img-src 'self';" .
