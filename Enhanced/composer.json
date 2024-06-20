@@ -2,6 +2,7 @@
     "require": {
         "pragmarx/google2fa": "^8.0",
         "endroid/qr-code": "^4.8",
-        "sonata-project/google-authenticator": "^2.3"
+        "sonata-project/google-authenticator": "^2.3",
+        "league/oauth2-client": "^2.7"
     }
 }
