@@ -3,7 +3,7 @@
     startSecureSession();  
     $csrf_token = generateCsrfToken();    
 
-    $error_message = isset($_SESSION['error']) ? $_SESSION['error'] : '';
+    $error_message = isset($_SESSION['error']) ? htmlspecialchars($_SESSION['error'], ENT_QUOTES, 'UTF-8') : '';
     unset($_SESSION['error']);
 ?>
 
