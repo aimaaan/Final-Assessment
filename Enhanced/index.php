@@ -1,12 +1,10 @@
 <?php
-session_start();
-if (isset($_SESSION['username'])) {
-    header('Location: main.php');
-    exit();
-}
+    require 'security_config.php'; 
+    startSecureSession();  
+    generateCsrfToken();   
 
-$error_message = isset($_SESSION['error']) ? $_SESSION['error'] : '';
-unset($_SESSION['error']);
+    $error_message = isset($_SESSION['error']) ? $_SESSION['error'] : '';
+    unset($_SESSION['error']);
 ?>
 
 <!DOCTYPE html>

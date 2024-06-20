@@ -6,20 +6,15 @@ if (!isset($_SESSION["loggedIn"])) {
     $_SESSION["loggedIn"] = false;
 }
 
-// Access session variables
+// Check if the user is logged in and display a welcome message if true
 if ($_SESSION["loggedIn"]) {
-    echo "Welcome, " . $_SESSION["username"];
+    echo "Welcome, " . htmlspecialchars($_SESSION["username"]);
 }
 
 // Check for session expiry or forced logout
 if (isset($_SESSION['expiry_time']) && time() > $_SESSION['expiry_time']) {
     // Save the intended destination before destroying the session
-    if (isset($_SESSION['redirect_after_login'])) {
-        $redirectAfterLogin = $_SESSION['redirect_after_login'];
-    } else {
-        // Default redirection if the expiry_time is reached and redirect_after_login isn't set
-        $redirectAfterLogin = 'main.php'; 
-    }
+    $redirectAfterLogin = isset($_SESSION['redirect_after_login']) ? $_SESSION['redirect_after_login'] : 'main.php';
 
     // Destroy the session and start a new one for the redirect
     session_destroy();
@@ -30,7 +25,8 @@ if (isset($_SESSION['expiry_time']) && time() > $_SESSION['expiry_time']) {
     exit();
 }
 
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['email'])) {
+// Check if the user is not logged in
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['username'])) {
     // Store the current URL for redirection after login
     $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
 
@@ -38,11 +34,11 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['email'])) {
     exit();
 }
 
-// If the user is logged in and attempts to access the login page,
-// redirect them to their intended page or a default page.
-if ($_SERVER['REQUEST_URI'] == 'form.php' && isset($_SESSION['redirect_after_login'])) {
+// If the user is logged in and attempts to access the login page, redirect them
+if (basename($_SERVER['PHP_SELF']) == 'index.php' && isset($_SESSION['redirect_after_login'])) {
     $redirectURL = $_SESSION['redirect_after_login'];
     unset($_SESSION['redirect_after_login']); // Clear the redirection target after use
     header("Location: $redirectURL");
     exit();
 }
+

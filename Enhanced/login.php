@@ -1,9 +1,10 @@
 <?php
+require 'security_config.php';
+startSecureSession();  
+
 require 'db.php';
 require 'vendor/autoload.php';
 use Sonata\GoogleAuthenticator\GoogleAuthenticator;
-
-session_start();
 
 define('MAX_ATTEMPTS', 5);
 define('LOCKOUT_DURATION', '15 minutes'); // Lockout duration

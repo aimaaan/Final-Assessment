@@ -1,10 +1,9 @@
 <?php
+require 'session_checks.php';
 require 'db.php';
 require 'vendor/autoload.php';
 use Sonata\GoogleAuthenticator\GoogleAuthenticator;
 use Sonata\GoogleAuthenticator\GoogleQrUrl;
-
-session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = trim($_POST['username']);
