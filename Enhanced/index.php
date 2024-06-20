@@ -1,7 +1,7 @@
 <?php
     require 'security_config.php'; 
     startSecureSession();  
-    generateCsrfToken();   
+    $csrf_token = generateCsrfToken();    
 
     $error_message = isset($_SESSION['error']) ? $_SESSION['error'] : '';
     unset($_SESSION['error']);
@@ -60,6 +60,8 @@
                 <h1 class="title-logo">Log In</h1><br>
                 <div id="alertPlaceholder"></div>
                 <form action="login.php" method="POST" onsubmit="return validateForm()">
+                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token, ENT_QUOTES, 'UTF-8'); ?>">
+                    
                     <label for="username">Username:</label>
                     <input 
                         type="text"
