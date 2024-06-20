@@ -42,7 +42,7 @@ if (!isset($_SESSION['username'])) {
             <li><a class="pasive" href="Facility.html">Facility</a></li>
             <li><a class="pasive" href="About Us.html">About Us</a></li>
             <li><a class="pasive" href="Contact.html">Contact Us</a></li>
-            <li><a class="pasive" href="logout.php">Logout</a></li> <!-- Added Logout Link -->
+            <li><a class="pasive" href="logout.php">Logout</a></li> 
         </ul>
     </nav>
 
