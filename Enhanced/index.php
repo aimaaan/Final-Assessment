@@ -69,7 +69,7 @@ unset($_SESSION['error']);
                         id="username" 
                         name="username" 
                         pattern="[a-zA-Z0-9_]{3,20}$" 
-                        required> <br>
+                        autocomplete="off" required> <br>
 
                     <label for="password">Password:</label>
                     <input 
@@ -78,11 +78,17 @@ unset($_SESSION['error']);
                         id="password" 
                         name="password" 
                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$" 
-                        required><br>
+                        autocomplete="off" required><br>
                     
                     <div class="form-group">
                         <label for="google2fa_code">Verify:</label>
-                        <input type="text" class="form-control" id="google2fa_code" name="google2fa_code" placeholder="Enter 2FA Code" required>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="google2fa_code" 
+                            name="google2fa_code" 
+                            placeholder="Enter 2FA Code" 
+                            autocomplete="off" required>
                     </div><br>
                     
                     <button type="submit" name="login" id="login" class="btn btn-primary w-100">Login</button>
