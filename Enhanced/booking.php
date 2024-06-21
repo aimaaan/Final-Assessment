@@ -107,9 +107,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book</title>
@@ -120,8 +119,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="Javascript/Book.js"></script>
     <script src="Javascript/onoffline.js"></script>
     <script src="Javascript/Hide_form.js"></script>
-    
-
 </head>
 
 <body ononline="onFunction()" onoffline="offFunction()">
@@ -148,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <li><a class="pasive" href="About Us.html">About Us</a></li>
             <li><a class="pasive" href="Contact.html">Contact Us</a></li>
             <li><a class="pasive" href="logout.php">Logout</a></li>
-            
+
         </ul>
     </nav>
 
@@ -166,9 +163,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </h4>
     </div>
 
-    <!-- <div class="button-container">
+     <div class="button-container">
         <button id="more">Book Now</button>
-    </div> -->
+    </div> 
 
     <div class="body">
         <div class="container">
