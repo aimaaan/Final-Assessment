@@ -15,7 +15,8 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($google2fa->checkCode($user['google2fa_secret'], $google2fa_code)) {
     // 2FA setup complete
-    header('Location: main.php');
+    header('Location: index.php');
+    echo '2FA setup complete. Redirecting to login page.';
 } else {
     echo 'Invalid 2FA code. Please try again.';
 }

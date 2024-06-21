@@ -22,7 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $google2fa_code = trim($_POST['google2fa_code']);
 
     // Retrieve user from the database
-    $stmt = $pdo->prepare('SELECT id, password, google2fa_secret, failed_attempts, lockout_time FROM users WHERE username = :username');
+    $stmt = $pdo->prepare('SELECT users.id, users.password, users.google2fa_secret, users.failed_attempts, users.lockout_time, roles.name as role 
+                           FROM users 
+                           JOIN user_roles ON users.id = user_roles.user_id 
+                           JOIN roles ON user_roles.role_id = roles.id 
+                           WHERE username = :username');
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -49,7 +53,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Start session and store user information
                 $_SESSION['username'] = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
                 $_SESSION['user_id'] = $user['id'];
-                header('Location: main.php');
+                $_SESSION['role'] = $user['role'];
+
+                // Redirect based on role
+                if ($user['role'] === 'Admin') {
+                    header('Location: booking_crud.php');
+                } else {
+                    header('Location: main.php');
+                }
                 exit();
             } else {
                 $_SESSION['error'] = 'Invalid 2FA code.';
