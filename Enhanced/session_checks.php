@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Initialize "loggedIn" session variable if it doesn't exist
 if (!isset($_SESSION["loggedIn"])) {
@@ -41,4 +43,3 @@ if (basename($_SERVER['PHP_SELF']) == 'index.php' && isset($_SESSION['redirect_a
     header("Location: $redirectURL");
     exit();
 }
-

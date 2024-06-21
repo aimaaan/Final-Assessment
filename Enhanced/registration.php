@@ -1,4 +1,8 @@
-<?php require 'session_checks.php'; ?>
+<?php 
+    require 'security_config.php'; 
+    startSecureSession();  
+    $csrf_token = generateCsrfToken();  
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,6 +43,8 @@
                 <?php endif; ?>
                 
                 <form name="signupForm" action="register.php" method="POST" onsubmit="return validateForm()">
+                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token, ENT_QUOTES, 'UTF-8'); ?>">
+                    
                     <label for="username">Username:</label>
                     <input type="text" name="username" class="form-control" id="username" pattern="[a-zA-Z0-9_]{3,20}$" autocomplete="off" required><br>
                     

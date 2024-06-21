@@ -1,17 +1,27 @@
 <?php
-require 'session_checks.php';
+require 'security_config.php';
+startSecureSession();
+
 require 'db.php';
 require 'vendor/autoload.php';
 use Sonata\GoogleAuthenticator\GoogleAuthenticator;
 use Sonata\GoogleAuthenticator\GoogleQrUrl;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $csrf_token = $_POST['csrf_token'] ?? '';
+    if (!validateCsrfToken($csrf_token)) {
+        $_SESSION['error'] = 'Invalid CSRF token. Please try again.';
+        header('Location: registration.php');
+        exit();
+    }
+
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
     $role = trim($_POST['role']);
 
     if (strlen($username) < 3 || strlen($password) < 6) {
-        echo 'Username must be at least 3 characters and password must be at least 6 characters long.';
+        $_SESSION['error'] = 'Username must be at least 3 characters and password must be at least 6 characters long.';
+        header('Location: registration.php');
         exit();
     }
 
@@ -29,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bindParam(':password', $hashedPassword, PDO::PARAM_STR);
         $stmt->bindParam(':google2fa_secret', $google2fa_secret, PDO::PARAM_STR);
         $stmt->execute();
-        
+
         // Get the user_id of the newly inserted user
         $user_id = $pdo->lastInsertId();
 
@@ -43,7 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_id'] = $user_id;
         $_SESSION['username'] = $username;
         header('Location: qr.php');
+        exit();
     } catch (PDOException $e) {
-        echo 'Registration failed: ' . $e->getMessage();
+        $_SESSION['error'] = 'Registration failed. Please try again.';
+        header('Location: registration.php');
+        exit();
     }
 }
