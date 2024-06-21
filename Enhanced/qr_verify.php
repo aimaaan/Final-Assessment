@@ -1,14 +1,8 @@
 <?php
+require 'session_checks.php';
 require 'db.php';
 require 'vendor/autoload.php';
 use Sonata\GoogleAuthenticator\GoogleAuthenticator;
-
-session_start();
-
-if (!isset($_SESSION['user_id'])) {
-    header('Location: index.php');
-    exit();
-}
 
 $google2fa = new GoogleAuthenticator();
 $google2fa_code = trim($_POST['google2fa_code']);

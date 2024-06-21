@@ -1,14 +1,22 @@
 <?php
+require 'security_config.php';
+startSecureSession();  
+
 require 'db.php';
 require 'vendor/autoload.php';
 use Sonata\GoogleAuthenticator\GoogleAuthenticator;
-
-session_start();
 
 define('MAX_ATTEMPTS', 5);
 define('LOCKOUT_DURATION', '15 minutes'); // Lockout duration
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $csrf_token = $_POST['csrf_token'] ?? '';
+    if (!validateCsrfToken($csrf_token)) {
+        $_SESSION['error'] = 'Invalid CSRF token. Please try again.';
+        header('Location: index.php');
+        exit();
+    }
+
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
     $google2fa_code = trim($_POST['google2fa_code']);
@@ -39,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt->execute();
 
                 // Start session and store user information
-                $_SESSION['username'] = $username;
+                $_SESSION['username'] = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
                 $_SESSION['user_id'] = $user['id'];
                 header('Location: main.php');
                 exit();
@@ -57,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $lockout_time = (new DateTime())->modify('+' . LOCKOUT_DURATION)->format('Y-m-d H:i:s');
             $_SESSION['error'] = 'Account locked due to too many failed attempts. Please try again later.';
         }
-        
+
         // Update failed attempts and lockout time
         $stmt = $pdo->prepare('UPDATE users SET failed_attempts = :failed_attempts, lockout_time = :lockout_time WHERE id = :id');
         $stmt->bindParam(':failed_attempts', $failed_attempts, PDO::PARAM_INT);

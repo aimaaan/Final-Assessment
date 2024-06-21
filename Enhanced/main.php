@@ -1,10 +1,7 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['username'])) {
-    header('Location: index.php');
-    exit();
-}
+require 'security_config.php';
+require 'session_checks.php';
+startSecureSession(); $csrfToken = generateCsrfToken();
 ?>
 
 <!DOCTYPE html>
