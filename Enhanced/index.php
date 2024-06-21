@@ -11,6 +11,7 @@ unset($_SESSION['error']);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -26,16 +27,16 @@ unset($_SESSION['error']);
 </head>
 
 <body>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var errorMessage = '<?php echo $error_message; ?>';
             if (errorMessage) {
                 var alertPlaceholder = document.getElementById('alertPlaceholder');
                 var wrapper = document.createElement('div');
-                wrapper.innerHTML = '<div class="alert alert-danger alert-dismissible" role="alert">' + 
-                                    errorMessage + 
-                                    '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                wrapper.innerHTML = '<div class="alert alert-danger alert-dismissible" role="alert">' +
+                    errorMessage +
+                    '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
                 alertPlaceholder.append(wrapper);
             }
         });
@@ -57,40 +58,22 @@ unset($_SESSION['error']);
             <div class="flexbox f1">
                 <img id="music-btn" class="logo-img1" src="Image/Hotel logo.png" />
             </div>
-            
+
             <div class="flexbox f2">
                 <h1 class="title-logo">Log In</h1><br>
                 <div id="alertPlaceholder"></div>
                 <form action="login.php" method="POST" onsubmit="return validateForm()">
                     <label for="username">Username:</label>
-                    <input 
-                        type="text"
-                        class="form-control" 
-                        id="username" 
-                        name="username" 
-                        pattern="[a-zA-Z0-9_]{3,20}$" 
-                        autocomplete="off" required> <br>
+                    <input type="text" class="form-control" id="username" name="username" pattern="[a-zA-Z0-9_]{3,20}$" autocomplete="off" required> <br>
 
                     <label for="password">Password:</label>
-                    <input 
-                        type="password"
-                        class="form-control" 
-                        id="password" 
-                        name="password" 
-                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$" 
-                        autocomplete="off" required><br>
-                    
+                    <input type="password" class="form-control" id="password" name="password" autocomplete="off" required><br>
+
                     <div class="form-group">
                         <label for="google2fa_code">Verify:</label>
-                        <input 
-                            type="text" 
-                            class="form-control" 
-                            id="google2fa_code" 
-                            name="google2fa_code" 
-                            placeholder="Enter 2FA Code" 
-                            autocomplete="off" required>
+                        <input type="text" class="form-control" id="google2fa_code" name="google2fa_code" placeholder="Enter 2FA Code" autocomplete="off" required>
                     </div><br>
-                    
+
                     <button type="submit" name="login" id="login" class="btn btn-primary w-100">Login</button>
                     <p class="mt-3 text-center">Don't have an account? <a href="registration.php">Sign up</a></p>
                 </form>
@@ -98,4 +81,5 @@ unset($_SESSION['error']);
         </section>
     </section>
 </body>
+
 </html>

@@ -96,9 +96,7 @@ input {
   transform: scale(1.2);
 }
 
-form {
-  display: none;
-}
+
 
 .button-container {
   text-align: center;
