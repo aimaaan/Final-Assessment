@@ -1,12 +1,14 @@
 <?php
 require 'security_config.php';
 require 'session_checks.php';
-startSecureSession(); $csrfToken = generateCsrfToken();
-?>
+startSecureSession(); 
+$csrfToken = generateCsrfToken();
 
+// Set Content-Security-Policy header
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://ajax.googleapis.com https://kit.fontawesome.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;");
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -20,9 +22,7 @@ startSecureSession(); $csrfToken = generateCsrfToken();
     <script src="Javascript/Surprise.js"></script>
     <script src="Javascript/Index-alert.js"></script>
 </head>
-
 <body ononline="onFunction()" onoffline="offFunction()">
-
     <nav class="nav-container">
         <a class="logo-link" href="main.php">
             <div class="logo-container">
@@ -44,7 +44,6 @@ startSecureSession(); $csrfToken = generateCsrfToken();
             <li><a class="pasive" href="logout.php">Logout</a></li>
         </ul>
     </nav>
-
     <section class="flexbox-container">
         <div class="flexbox f1">
             <img id="music-btn" class="logo-img1" src="Image/Hotel logo.png" alt="Hotel Logo" />
@@ -56,11 +55,9 @@ startSecureSession(); $csrfToken = generateCsrfToken();
             <p onclick="music_alert()" class="notice">Click Here </p>
         </div>
     </section>
-
     <audio id="music-box" loop>
         <source src="Audio/Flower (Crash Landing On You OST)-Instrumental.mp3" type="audio/mpeg">
     </audio>
     <script src="https://kit.fontawesome.com/57086d82eb.js" crossorigin="anonymous"></script>
 </body>
-
 </html>
