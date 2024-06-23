@@ -10,9 +10,9 @@ function startSecureSession() {
             'lifetime' => $cookieParams["lifetime"],
             'path' => $cookieParams["path"],
             'domain' => $_SERVER['HTTP_HOST'],  // Dynamic domain
-            'secure' => true,  // Secure attribute set to true for HTTPS only
+            'secure' => !empty($_SERVER['HTTPS']),  // Secure if HTTPS is used
             'httponly' => true,
-            'samesite' => 'Strict'  // SameSite attribute set to Strict for CSRF protection
+            'samesite' => 'Strict'
         ]);
 
         session_start();
@@ -20,35 +20,30 @@ function startSecureSession() {
     }
 }
 
-// Implement CSP and other security headers
+// Implement CSP
 function setCSP() {
-    // Content-Security-Policy
     $csp = "Content-Security-Policy: " .
-           "default-src 'self';" .
-           " script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js;" .
-           " object-src 'none';" .
-           " style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com;" .
-           " img-src 'self';" .
-           " media-src 'none';" .
-           " frame-src 'none';" .
-           " font-src 'self' https://fonts.gstatic.com;" .
-           " connect-src 'self';";
-
-    // Set CSP header
+           "default-src 'self'; " .
+           "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://ajax.googleapis.com; " .
+           "object-src 'none'; " .
+           "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; " .
+           "img-src 'self' https://trusted-image-source.com; " . // Include trusted image sources
+           "media-src 'self' https://trusted-media-source.com; " . // Include trusted media sources (audio, video)
+           "frame-src 'none'; " .
+           "font-src 'self' https://fonts.gstatic.com; " .
+           "connect-src 'self';";
     header($csp);
 
     // Additional security headers
     header("X-Content-Type-Options: nosniff");
     header("X-Frame-Options: DENY");
     header("X-XSS-Protection: 1; mode=block");
-    
-    // If HTTPS is used, set Strict-Transport-Security header
     if (isset($_SERVER['HTTPS'])) {
         header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
     }
 }
 
-// Function to generate CSRF token 
+// Generate CSRF token
 function generateCsrfToken() {
     if (!isset($_SESSION['csrf_token'])) {
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -56,7 +51,7 @@ function generateCsrfToken() {
     return $_SESSION['csrf_token'];
 }
 
-// Function to validate CSRF token 
+// Validate CSRF token
 function validateCsrfToken($token) {
     return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
 }
