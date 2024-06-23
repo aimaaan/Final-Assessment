@@ -161,81 +161,83 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div> 
 
     <div class="body">
-        <div class="container">
-            <div class="content">
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="form">
-                    <div class="user_details">
-                        <div class="input_box">
-                            <label for="first_name">First Name :</label>
-                            <input type="text" name="first_name" id="first_name" required>
-                            <?php if (!empty($error_first_name)) : ?>
-                                <p style="color: red;"><?php echo htmlspecialchars($error_first_name); ?></p>
-                            <?php endif; ?>
-                        </div>
-
-                        <div class="input_box">
-                            <label for="last_name">Last Name :</label>
-                            <input type="text" name="last_name" id="last_name" required>
-                            <?php if (!empty($error_last_name)) : ?>
-                                <p style="color: red;"><?php echo htmlspecialchars($error_last_name); ?></p>
-                            <?php endif; ?>
-                        </div>
-
-                        <div class="input_box">
-                            <label for="phone">Phone no. :</label>
-                            <input type="text" name="phone" id="phone" required>
-                            <?php if (!empty($error_phone)) : ?>
-                                <p style="color: red;"><?php echo htmlspecialchars($error_phone); ?></p>
-                            <?php endif; ?>
-                        </div>
-
-                        <div class="input_box">
-                            <label for="email">Email :</label>
-                            <input type="email" name="email" id="email" required>
-                            <?php if (!empty($error_email)) : ?>
-                                <p style="color: red;"><?php echo htmlspecialchars($error_email); ?></p>
-                            <?php endif; ?>
-                        </div>
-
-                        <div class="input_box">
-                            <label for="checkin">Check-in :</label>
-                            <input type="date" name="checkin" id="checkin" required>
-                            <?php if (!empty($error_checkin)) : ?>
-                                <p style="color: red;"><?php echo htmlspecialchars($error_checkin); ?></p>
-                            <?php endif; ?>
-                        </div>
-
-                        <div class="input_box">
-                            <label for="checkout">Check-out :</label>
-                            <input type="date" name="checkout" id="checkout" required>
-                            <?php if (!empty($error_checkout)) : ?>
-                                <p style="color: red;"><?php echo htmlspecialchars($error_checkout); ?></p>
-                            <?php endif; ?>
-                        </div>
-
-                        <div class="input_box">
-                            <label for="adult">No. of Adults :</label>
-                            <input type="number" name="adult" id="adult" required>
-                            <?php if (!empty($error_adult)) : ?>
-                                <p style="color: red;"><?php echo htmlspecialchars($error_adult); ?></p>
-                            <?php endif; ?>
-                        </div>
-
-                        <div class="input_box">
-                            <label for="children">No. of Children :</label>
-                            <input type="number" name="children" id="children" required>
-                            <?php if (!empty($error_children)) : ?>
-                                <p style="color: red;"><?php echo htmlspecialchars($error_children); ?></p>
-                            <?php endif; ?>
-                        </div>
+    <div class="container">
+        <div class="content">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="form">
+                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
+                <div class="user_details">
+                    <div class="input_box">
+                        <label for="first_name">First Name :</label>
+                        <input type="text" name="first_name" id="first_name" required>
+                        <?php if (!empty($error_first_name)) : ?>
+                            <p style="color: red;"><?php echo htmlspecialchars($error_first_name); ?></p>
+                        <?php endif; ?>
                     </div>
 
-                    <div class="button">
-                        <input type="submit" value="Submit">
+                    <div class="input_box">
+                        <label for="last_name">Last Name :</label>
+                        <input type="text" name="last_name" id="last_name" required>
+                        <?php if (!empty($error_last_name)) : ?>
+                            <p style="color: red;"><?php echo htmlspecialchars($error_last_name); ?></p>
+                        <?php endif; ?>
                     </div>
-                </form>
-            </div>
+
+                    <div class="input_box">
+                        <label for="phone">Phone no. :</label>
+                        <input type="text" name="phone" id="phone" required>
+                        <?php if (!empty($error_phone)) : ?>
+                            <p style="color: red;"><?php echo htmlspecialchars($error_phone); ?></p>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="input_box">
+                        <label for="email">Email :</label>
+                        <input type="email" name="email" id="email" required>
+                        <?php if (!empty($error_email)) : ?>
+                            <p style="color: red;"><?php echo htmlspecialchars($error_email); ?></p>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="input_box">
+                        <label for="checkin">Check-in :</label>
+                        <input type="date" name="checkin" id="checkin" required>
+                        <?php if (!empty($error_checkin)) : ?>
+                            <p style="color: red;"><?php echo htmlspecialchars($error_checkin); ?></p>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="input_box">
+                        <label for="checkout">Check-out :</label>
+                        <input type="date" name="checkout" id="checkout" required>
+                        <?php if (!empty($error_checkout)) : ?>
+                            <p style="color: red;"><?php echo htmlspecialchars($error_checkout); ?></p>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="input_box">
+                        <label for="adult">No. of Adults :</label>
+                        <input type="number" name="adult" id="adult" required>
+                        <?php if (!empty($error_adult)) : ?>
+                            <p style="color: red;"><?php echo htmlspecialchars($error_adult); ?></p>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="input_box">
+                        <label for="children">No. of Children :</label>
+                        <input type="number" name="children" id="children" required>
+                        <?php if (!empty($error_children)) : ?>
+                            <p style="color: red;"><?php echo htmlspecialchars($error_children); ?></p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <div class="button">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
         </div>
+    </div>
+</div>
     </div>
     <script src="https://kit.fontawesome.com/57086d82eb.js" crossorigin="anonymous"></script>
 </body>
