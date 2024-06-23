@@ -19,7 +19,6 @@ startSecureSession(); $csrfToken = generateCsrfToken();
     <script src="Javascript/Index.js"></script>
     <script src="Javascript/Surprise.js"></script>
     <script src="Javascript/Index-alert.js"></script>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://ajax.googleapis.com https://kit.fontawesome.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;">
 </head>
 
 <body ononline="onFunction()" onoffline="offFunction()">
