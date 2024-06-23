@@ -10,7 +10,7 @@ function startSecureSession() {
             'lifetime' => $cookieParams["lifetime"],
             'path' => $cookieParams["path"],
             'domain' => $_SERVER['HTTP_HOST'],  // Dynamic domain
-            'secure' => !empty($_SERVER['HTTPS']),  // Secure if HTTPS is used
+            'secure' => isset($_SERVER['HTTPS']),  // Secure if HTTPS is used
             'httponly' => true,
             'samesite' => 'Strict'
         ]);
@@ -23,14 +23,14 @@ function startSecureSession() {
 // Implement CSP
 function setCSP() {
     $csp = "Content-Security-Policy: " .
-           "default-src 'self'; " .
-           "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://ajax.googleapis.com; " .
-           "object-src 'none'; " .
-           "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; " .
-           "img-src 'self' https://trusted-image-source.com; " . // Include trusted image sources
-           "media-src 'self' https://trusted-media-source.com; " . // Include trusted media sources (audio, video)
-           "frame-src 'none'; " .
-           "font-src 'self' https://fonts.gstatic.com; " .
+           "default-src 'self';" .
+           "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://ajax.googleapis.com;" .
+           "object-src 'none';" .
+           "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com;" .
+           "img-src 'self' https://trusted-image-source.com;" . // Include trusted image sources
+           "media-src 'self' https://trusted-media-source.com;" . // Include trusted media sources (audio, video)
+           "frame-src 'none';" .
+           "font-src 'self' https://fonts.gstatic.com;" .
            "connect-src 'self';";
     header($csp);
 
@@ -43,7 +43,6 @@ function setCSP() {
     }
 }
 
-// Generate CSRF token
 function generateCsrfToken() {
     if (!isset($_SESSION['csrf_token'])) {
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -51,12 +50,10 @@ function generateCsrfToken() {
     return $_SESSION['csrf_token'];
 }
 
-// Validate CSRF token
 function validateCsrfToken($token) {
     return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
 }
 
-// Start secure session and apply CSP
 startSecureSession();
 setCSP();
 ?>
