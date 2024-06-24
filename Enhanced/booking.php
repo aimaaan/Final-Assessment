@@ -20,14 +20,14 @@ if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-function sanitizeInput($data) {
+function sanitizeInput($data)
+{
     return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
 }
 
 $error_first_name = '';
 $error_last_name = '';
 $error_phone = '';
-$error_email = '';
 $error_checkin = '';
 $error_checkout = '';
 $error_adult = '';
@@ -41,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $first_name = sanitizeInput(trim($_POST["first_name"]));
     $last_name = sanitizeInput(trim($_POST["last_name"]));
     $phone = sanitizeInput(trim($_POST["phone"]));
-    $email = sanitizeInput(trim($_POST["email"]));
     $checkin = sanitizeInput(trim($_POST["checkin"]));
     $checkout = sanitizeInput(trim($_POST["checkout"]));
     $adult = sanitizeInput(trim($_POST["adult"]));
@@ -63,12 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_phone = "Phone is required";
     } elseif (!preg_match("/^\d{10}$/", $phone)) {
         $error_phone = "Invalid phone number format";
-    }
-
-    if (empty($email)) {
-        $error_email = "Email is required";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error_email = "Invalid email format";
     }
 
     if (empty($checkin)) {
@@ -97,7 +90,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $query->bindParam(':first_name', $first_name, PDO::PARAM_STR);
             $query->bindParam(':last_name', $last_name, PDO::PARAM_STR);
             $query->bindParam(':phone', $phone, PDO::PARAM_STR);
-            $query->bindParam(':email', $email, PDO::PARAM_STR);
             $query->bindParam(':checkin', $checkin);
             $query->bindParam(':checkout', $checkout);
             $query->bindParam(':adult', $adult, PDO::PARAM_INT);
@@ -112,6 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -125,10 +118,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="Javascript/onoffline.js"></script>
     <script src="Javascript/Hide_form.js"></script>
 </head>
+
 <body ononline="onFunction()" onoffline="offFunction()">
 
     <header class="header">
-        <?php include 'header.php';?>
+        <?php include 'header.php'; ?>
     </header>
 
     <div class="container-title">Booking</div>
@@ -147,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="button-container">
         <button id="more">Book Now</button>
-    </div> 
+    </div>
 
     <div class="body">
         <div class="container">
@@ -176,14 +170,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <input type="text" name="phone" id="phone" required>
                             <?php if (!empty($error_phone)) : ?>
                                 <p style="color: red;"><?php echo htmlspecialchars($error_phone); ?></p>
-                            <?php endif; ?>
-                        </div>
-
-                        <div class="input_box">
-                            <label for="email">Email :</label>
-                            <input type="email" name="email" id="email" required>
-                            <?php if (!empty($error_email)) : ?>
-                                <p style="color: red;"><?php echo htmlspecialchars($error_email); ?></p>
                             <?php endif; ?>
                         </div>
 
@@ -230,4 +216,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <script src="https://kit.fontawesome.com/57086d82eb.js" crossorigin="anonymous"></script>
 </body>
+
 </html>
