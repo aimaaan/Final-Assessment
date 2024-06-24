@@ -8,7 +8,7 @@ $csrf_token = generateCsrfToken();
 <html lang="en">
 
 
-
+<!-- enable right click -->
 <script>
     window.oncontextmenu = function() {
         return false;

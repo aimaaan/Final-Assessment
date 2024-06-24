@@ -9,7 +9,9 @@ $csrfToken = generateCsrfToken();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <meta name="robots" content="noindex" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,9 +27,9 @@ $csrfToken = generateCsrfToken();
 </head>
 
 <body ononline="onFunction()" onoffline="offFunction()">
-    
+
     <header class="header">
-        <?php include 'header.php';?>
+        <?php include 'header.php'; ?>
     </header>
 
     <section class="flexbox-container">
@@ -47,4 +49,5 @@ $csrfToken = generateCsrfToken();
     </audio>
     <script src="https://kit.fontawesome.com/57086d82eb.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

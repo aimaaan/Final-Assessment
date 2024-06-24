@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /INFO4345/Final-Assessment/Enhanced/
+RewriteBase /WWW/Final-Assessment/Enhanced/
 
 # URL rewriting rules for pages
 RewriteRule ^login/?$ index.php [L,NC]
