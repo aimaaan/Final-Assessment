@@ -134,7 +134,16 @@ function startSecureSession() {
     }
 }
 ```
-
+#### c. Implementing server side authorization.
+   - Checks the role of the user for each page. If the role are permissable then it can access the page. For example:
+```php
+// Check if the user is logged in and has the 'User' or 'Admin' role
+if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['User', 'Admin'])) {
+    // If not a user or admin, redirect to an unauthorized access page
+    echo "<script>alert('You are not authorized to access this page. Please Sign in');</script>";
+    exit();
+}
+```
 
 ### 3.Input Validation
 a. Enhanced the booking form 
