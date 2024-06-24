@@ -41,7 +41,7 @@ Improved version of Flower Hotel web app with security features added onto the o
 ## Enhancement
 The authors of the file additions/enhancements are encased in square brackets as such: 
 - [aiman] refers to [Ahmad Arif Aiman bin Ahmad Fauzi](https://github.com/aimaaan)
-- [Nasrullah] refers to [https://github.com/MuhdNasrullah]
+- [Nasrullah] refers to [https://github.com/MuhdNasrullah](https://github.com/MuhdNasrullah)
 - [zafran] refers to [Muhammad Zafran bin Zamani](https://github.com/zafranzamani)
 
 ### 1. Authentication [aiman]
@@ -74,7 +74,10 @@ The authors of the file additions/enhancements are encased in square brackets as
               }
           }
         ```
+     ![previouspassword](https://github.com/aimaaan/Final-Assessment/assets/99475237/626195b1-d788-429e-94c2-cd2019fa77bc)
 
+     Everytime user register, password are stored in ``previous_passwords table`` with timeframe. If same user want to register, it will refer to this table and disable same password for registration. 
+      
       #### c. Enable account lockout and disable autocomplete 
       - Allow account to be lockout if failed attempt more than 5 times and timeframe are recorded in the database. 
       - The duration of account lockout are set 15min and it will automatically reset. The code implementation are in [login.php](Enhanced/login.php).
@@ -93,6 +96,7 @@ The authors of the file additions/enhancements are encased in square brackets as
 
       #### e. Implementing secure web transmission by using encrypted channel (SSL)
       ![SSL HTTPS](https://github.com/aimaaan/Final-Assessment/assets/99475237/e20dab77-206f-41a5-9ac8-c0354379377c)
+        - Implemented SSL (Secure Sockets Layer) by configuring the makecert.bat file to create a new SSL certificate (server.crt) and a private key (server.key). To applied secured localhost website.
      
 
 ### 2. Authorisation [aiman]
@@ -153,18 +157,23 @@ The session checks are include at each important pages such as:
    - using ``startSecureSession()`` function on [security_config.php](Enhanced/security_config.php), it can also regenerate session id for every new login to avoid reuse the same sessionIDs.
    - There are also logout at nav bar to allow user to logout with a single click and invalidate any active session and contents. it uses [logout.php](Enhanced/logout.php) to destroy session everytime user logout.
      
-#### d. Implementing httponly flag and destroying invalidated session id
+#### d. Implementing httponly flag, secure cookies and destroying invalidated session id
    - Implemented on [security_config.php](Enhanced/security_config.php), set the ``httponly = true;`` to Ensure all cookies, including session cookies, use the HttpOnly flag.
-   - Destroying session Id are also enable on everytime user logged out. using ``session_destroy()`` and ``session_unset();`` in [logout.php](Enhanced/logout.php) 
+   - Implements secure cookies to ensure that cookies are transmitted securely over HTTPS and are protected against certain types of attacks by configure session and cookies with the ``Secure`` attributes. As shown on the [security_config.php](Enhanced/security_config.php), `` 'secure' => isset($_SERVER['HTTPS'])``. Enable the cookies to only sent to the server over HTTPS connections and prevents the cookie from being transmitted over unencrypted connections, which could be intercepted by attackers.
+   - Destroying session Id are also enable on everytime user logged out. using ``session_destroy()`` and ``session_unset();`` in [logout.php](Enhanced/logout.php)
 
-### 3.Input Validation
-a. Enhanced the booking form 
-- Implement the regex for the booking for all the input.
-- User need to enter all the data required by the form before submitting it following the regex. 
-- When all the inputs are validated, it will go to the database.
-
-### 4. File Security principles
-a. implement the code that enables the right-click for login and registration pages.
+### 3.Input Validation [Nasrullah]
+a.Enhanced the [booking.php](Enhanced/booking.php) 
+- Using method( Regular Expression Patterns (Regex Patterns) )
+  -- We are using Regex because it is a great method to use since it can prevent the SQL injection by limiting the user to key in the data using all characters instead they only can fill up the data using the allowed regex patterns.
+  ![image](https://github.com/aimaaan/Final-Assessment/assets/106076684/6d408731-962e-44c8-b5c5-39e3ac1a8cfe)
+- Client Side validation
+  -- Below is our client-side validation 
+  ![image](https://github.com/aimaaan/Final-Assessment/assets/106076684/b99903fa-573f-4324-ac68-601d2773931d)
+  -- When the client has fill up the data then they will received the pop up notifications
+  ![image](https://github.com/aimaaan/Final-Assessment/assets/106076684/d8809e50-a7e4-4b2d-8b6a-265b643934a5)
+### 4. File Security principles [Nasrullah]
+a. implement the code that disables the right-click for login and registration pages.
 
  ```php
 <script>
@@ -175,11 +184,18 @@ a. implement the code that enables the right-click for login and registration pa
 ```
 
 b. Adding the robots.txt
-- 'robots.txt' is to make sure that web crawlers cannot request from our site. 
+- 'robots.txt' is to make sure that web crawlers cannot request from our site.
+  
+c. Shortened the URL is being implemented by creating .htacces file in htdocs to prevent any URL rewriting which can lead the attackers to make any changes to the folders.
+- Doc '.htaccess' is shown below
+![image](https://github.com/aimaaan/Final-Assessment/assets/106076684/59a26529-d540-4ee6-9c55-f315f1fd60ec)
 
 
 ### Weekly Progress Report
-[Weekly Progress Report - Google Docs.pdf](https://github.com/user-attachments/files/15954439/Weekly.Progress.Report.-.Google.Docs.pdf)
+[Weekly.Progress.Report.-.Google.Docs.pdf](https://github.com/user-attachments/files/15955825/Weekly.Progress.Report.-.Google.Docs.pdf)
+
 
 ## References
 1. Webappsec class handouts from our course instructor: [Dr. Muhamad Sadry Abu Seman](https://github.com/muhdsadry), DIS, KICT, IIUM
+2. https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
+3. https://infosec.mozilla.org/guidelines/web_security
