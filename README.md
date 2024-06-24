@@ -44,15 +44,20 @@ The authors of the file additions/enhancements are encased in square brackets as
 - nas
 - [zafran] refers to [Muhammad Zafran bin Zamani](https://github.com/zafranzamani)
 
-### 1. Authentication
-a. Added user authentication pages which are: [aiman]
-   -  [registration.php](Enhanced/registration.php), [register.php](Enhanced/register.php)
+### 1. Authentication [aiman]
+#### a. Securing password-based authentication using hashed password and generate secret key for 2FA
+   - the password complexity are set Numbers + Lowercase Letters + Uppercase letters + symbols + at least 12 characters by using regex: ``'/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{12,}$/'``
+   - password are hashed using ``password_hash($password, PASSWORD_DEFAULT);`` in [register.php](Enhanced/register.php) & verify ``password_verify($password, $user['password']))`` at [login.php](Enhanced/login.php)
+#### b. Implementing two-factor Authentication (2FA) & Added user authentication pages which are:
+   - [registration.php](Enhanced/registration.php), [register.php](Enhanced/register.php)
    -  [index.php](Enhanced/index.php), [login.php](Enhanced/login.php)
 
   using sonata-project/google-authenticator: Google Authenticator library to generate qr code and provide otp via google authenticator app for authentication.
   The file are: 
    -  [qr.php](Enhanced/qr.php)
    -  [qr_verify.php](Enhanced/qr_verify.php)
+
+After registration, user will redirecting to [qr.php](Enhanced/qr.php) to scan and verify via their otp number on google authenticator apps. Then, it will redirect user to [index.php](Enhanced/index.php) for login and verify their otp value again.
 
 ### 2. Authorisation
 a. Implementing user authorisation by using role-based access control(RBAC) on database level. [aiman]
