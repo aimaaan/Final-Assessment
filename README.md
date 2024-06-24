@@ -175,11 +175,16 @@ a. implement the code that enables the right-click for login and registration pa
 ```
 
 b. Adding the robots.txt
-- 'robots.txt' is to make sure that web crawlers cannot request from our site. 
+- 'robots.txt' is to make sure that web crawlers cannot request from our site.
+  
+c. Shortened the URL is being implemented by creating .htacces file in htdocs to prevent any URL rewriting which can lead the attackers to make any changes to the folders.
+- Doc '.htaccess' is shown below
+![image](https://github.com/aimaaan/Final-Assessment/assets/106076684/59a26529-d540-4ee6-9c55-f315f1fd60ec)
 
 
 ### Weekly Progress Report
-[Weekly Progress Report - Google Docs.pdf](https://github.com/user-attachments/files/15954439/Weekly.Progress.Report.-.Google.Docs.pdf)
+[Weekly.Progress.Report.-.Google.Docs.pdf](https://github.com/user-attachments/files/15955825/Weekly.Progress.Report.-.Google.Docs.pdf)
+
 
 ## References
 1. Webappsec class handouts from our course instructor: [Dr. Muhamad Sadry Abu Seman](https://github.com/muhdsadry), DIS, KICT, IIUM
