@@ -1,0 +1,15 @@
+RewriteEngine On
+RewriteBase /INFO4345/Final-Assessment/Enhanced/
+
+# URL rewriting rules for pages
+RewriteRule ^login/?$ index.php [L,NC]
+RewriteRule ^home/?$ main.php [L,NC]
+RewriteRule ^registration/?$ registration.php [L,NC]
+RewriteRule ^logout/?$ logout.php [L,NC]
+
+
+# URL rewriting rules for static assets
+RewriteRule ^styles/(.+\.(css|styles))$ styles/$1 [L,NC]
+RewriteRule ^javascript/(.+\.(js|javascript))$ javascript/$1 [L,NC]
+RewriteRule ^images/(.+\.(png|jpg|jpeg|gif|svg))$ images/$1 [L,NC]
+RewriteRule ^audio/(.+\.(mp3|wav))$ audio/$1 [L,NC]

@@ -114,29 +114,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body ononline="onFunction()" onoffline="offFunction()">
 
-    <nav>
-        <a class="logo-link" href="main.php">
-            <div class="logo-container">
-                <img class="logo-img" src="Image/Hotel logo.png" />
-                <h4>Flower Hotel</h4>
-            </div>
-        </a>
-
-        <input type="checkbox" id="click" />
-        <label for="click" class="menu-btn">
-            <i class="fas fa-bars"></i>
-        </label>
-
-        <ul class="list-link-container">
-            <li><a class="pasive" href="main.php">Home</a></li>
-            <li><a class="active" href="booking.php">Booking</a></li>
-            <li><a class="pasive" href="Room.html">Room</a></li>
-            <li><a class="pasive" href="Facility.html">Facility</a></li>
-            <li><a class="pasive" href="About Us.html">About Us</a></li>
-            <li><a class="pasive" href="Contact.html">Contact Us</a></li>
-            <li><a class="pasive" href="logout.php">Logout</a></li>
-        </ul>
-    </nav>
+    <header class="header">
+        <?php include 'header.php';?>
+    </header>
 
     <div class="container-title">Booking</div>
 
