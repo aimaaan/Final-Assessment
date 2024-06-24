@@ -1,12 +1,12 @@
 <?php
 require 'security_config.php';
 require 'session_checks.php';
-startSecureSession(); 
-$csrfToken = generateCsrfToken();
 
-// Set Content-Security-Policy header
-header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://ajax.googleapis.com https://kit.fontawesome.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;");
+// Start a secure session and generate a CSRF token
+startSecureSession();
+$csrfToken = generateCsrfToken();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +21,9 @@ header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-i
     <script src="Javascript/Index.js"></script>
     <script src="Javascript/Surprise.js"></script>
     <script src="Javascript/Index-alert.js"></script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://ajax.googleapis.com https://kit.fontawesome.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net;">
 </head>
+
 <body ononline="onFunction()" onoffline="offFunction()">
     <nav class="nav-container">
         <a class="logo-link" href="main.php">
@@ -44,6 +46,7 @@ header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-i
             <li><a class="pasive" href="logout.php">Logout</a></li>
         </ul>
     </nav>
+
     <section class="flexbox-container">
         <div class="flexbox f1">
             <img id="music-btn" class="logo-img1" src="Image/Hotel logo.png" alt="Hotel Logo" />
@@ -55,6 +58,7 @@ header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-i
             <p onclick="music_alert()" class="notice">Click Here </p>
         </div>
     </section>
+
     <audio id="music-box" loop>
         <source src="Audio/Flower (Crash Landing On You OST)-Instrumental.mp3" type="audio/mpeg">
     </audio>
