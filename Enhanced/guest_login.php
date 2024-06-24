@@ -10,7 +10,7 @@ if (!validateCsrfToken($csrf_token)) {
 }
 
 $_SESSION['username'] = 'Guest';
-$_SESSION['user_id'] = 0; 
+$_SESSION['user_id'] = 3; 
 $_SESSION['role'] = 'Guest';
 
 header('Location: main.php'); 
