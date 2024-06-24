@@ -190,3 +190,6 @@ c. Shortened the URL is being implemented by creating .htacces file in htdocs to
 
 ## References
 1. Webappsec class handouts from our course instructor: [Dr. Muhamad Sadry Abu Seman](https://github.com/muhdsadry), DIS, KICT, IIUM
+2. https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
+3. https://infosec.mozilla.org/guidelines/web_security
+4. https://cheatsheetseries.owasp.org/cheatsheets
