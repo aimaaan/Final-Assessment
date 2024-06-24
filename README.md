@@ -93,6 +93,7 @@ The authors of the file additions/enhancements are encased in square brackets as
 
       #### e. Implementing secure web transmission by using encrypted channel (SSL)
       ![SSL HTTPS](https://github.com/aimaaan/Final-Assessment/assets/99475237/e20dab77-206f-41a5-9ac8-c0354379377c)
+        - Implemented SSL (Secure Sockets Layer) by configuring the makecert.bat file to create a new SSL certificate (server.crt) and a private key (server.key). To applied secured localhost website.
      
 
 ### 2. Authorisation [aiman]
