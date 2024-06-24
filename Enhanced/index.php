@@ -1,14 +1,22 @@
 <?php
-    require 'security_config.php'; 
-    startSecureSession();  
-    $csrf_token = generateCsrfToken();    
 
-    $error_message = isset($_SESSION['error']) ? htmlspecialchars($_SESSION['error'], ENT_QUOTES, 'UTF-8') : '';
-    unset($_SESSION['error']);
+require 'security_config.php';
+startSecureSession();
+$csrf_token = generateCsrfToken();
+
+$error_message = isset($_SESSION['error']) ? htmlspecialchars($_SESSION['error'], ENT_QUOTES, 'UTF-8') : '';
+unset($_SESSION['error']);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- this if for the rigth click disable function-->
+<script>
+    window.oncontextmenu = function() {
+        return false;
+    }
+</script>
 
 <head>
     <meta charset="UTF-8" />
@@ -61,8 +69,8 @@
                 <h1 class="title-logo">Log In</h1><br>
                 <div id="alertPlaceholder"></div>
                 <form action="login.php" method="POST" onsubmit="return validateForm()">
-                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token, ENT_QUOTES, 'UTF-8'); ?>">
-                    
+                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token, ENT_QUOTES, 'UTF-8'); ?>">
+
                     <label for="username">Username:</label>
                     <input type="text" class="form-control" id="username" name="username" pattern="[a-zA-Z0-9_]{3,20}$" autocomplete="off" required> <br>
 

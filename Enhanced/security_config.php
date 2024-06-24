@@ -33,33 +33,32 @@ function startSecureSession() {
 }
 
 //Implement CSP
-function setCSP() {
+function setCSP()
+{
     $csp = "Content-Security-Policy: default-src 'self';" .
-           " script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js;" .
-           " object-src 'none';" .
-           " style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com;" .
-           " img-src 'self';" .
-           " media-src 'none';" .
-           " frame-src 'none';" .
-           " font-src 'self' https://fonts.gstatic.com;" .
-           " connect-src 'self';";
+        " script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js;" .
+        " object-src 'none';" .
+        " style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com;" .
+        " img-src 'self';" .
+        " media-src 'none';" .
+        " frame-src 'none';" .
+        " font-src 'self' https://fonts.gstatic.com;" .
+        " connect-src 'self';";
     header($csp);
 }
 
-function generateCsrfToken() {
+function generateCsrfToken()
+{
     if (!isset($_SESSION['csrf_token'])) {
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     }
     return $_SESSION['csrf_token'];
 }
 
-function validateCsrfToken($token) {
+function validateCsrfToken($token)
+{
     return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
 }
 
 startSecureSession();
 setCSP();
-
-
-
-
