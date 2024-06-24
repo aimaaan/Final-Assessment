@@ -159,13 +159,13 @@ The session checks are include at each important pages such as:
    - Implements secure cookies to ensure that cookies are transmitted securely over HTTPS and are protected against certain types of attacks by configure session and cookies with the ``Secure`` attributes. As shown on the [security_config.php](Enhanced/security_config.php), `` 'secure' => isset($_SERVER['HTTPS'])``. Enable the cookies to only sent to the server over HTTPS connections and prevents the cookie from being transmitted over unencrypted connections, which could be intercepted by attackers.
    - Destroying session Id are also enable on everytime user logged out. using ``session_destroy()`` and ``session_unset();`` in [logout.php](Enhanced/logout.php)
 
-### 3.Input Validation
+### 3.Input Validation [Nasrullah]
 a. Enhanced the booking form 
 - Implement the regex for the booking for all the input.
 - User need to enter all the data required by the form before submitting it following the regex. 
 - When all the inputs are validated, it will go to the database.
 
-### 4. File Security principles
+### 4. File Security principles [Nasrullah]
 a. implement the code that disables the right-click for login and registration pages.
 
  ```php
