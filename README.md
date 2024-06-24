@@ -153,9 +153,10 @@ The session checks are include at each important pages such as:
    - using ``startSecureSession()`` function on [security_config.php](Enhanced/security_config.php), it can also regenerate session id for every new login to avoid reuse the same sessionIDs.
    - There are also logout at nav bar to allow user to logout with a single click and invalidate any active session and contents. it uses [logout.php](Enhanced/logout.php) to destroy session everytime user logout.
      
-#### d. Implementing httponly flag and destroying invalidated session id
+#### d. Implementing httponly flag, secure cookies and destroying invalidated session id
    - Implemented on [security_config.php](Enhanced/security_config.php), set the ``httponly = true;`` to Ensure all cookies, including session cookies, use the HttpOnly flag.
-   - Destroying session Id are also enable on everytime user logged out. using ``session_destroy()`` and ``session_unset();`` in [logout.php](Enhanced/logout.php) 
+   - Implements secure cookies to ensure that cookies are transmitted securely over HTTPS and are protected against certain types of attacks by configure session and cookies with the ``Secure`` attributes. As shown on the [security_config.php](Enhanced/security_config.php), `` 'secure' => isset($_SERVER['HTTPS'])``. Enable the cookies to only sent to the server over HTTPS connections and prevents the cookie from being transmitted over unencrypted connections, which could be intercepted by attackers.
+   - Destroying session Id are also enable on everytime user logged out. using ``session_destroy()`` and ``session_unset();`` in [logout.php](Enhanced/logout.php)
 
 ### 3.Input Validation
 a. Enhanced the booking form 
