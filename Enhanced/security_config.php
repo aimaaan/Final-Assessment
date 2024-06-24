@@ -4,34 +4,23 @@ function startSecureSession() {
     if (session_status() === PHP_SESSION_NONE) {
         // Session settings are secure when using cookies
         ini_set('session.use_only_cookies', 1);
+        
         $cookieParams = session_get_cookie_params();
         session_set_cookie_params([
             'lifetime' => $cookieParams["lifetime"],
             'path' => $cookieParams["path"],
-            'domain' => 'localhost',  // Modify if deploying on a real server
-            'secure' => false,  // Set to true if using HTTPS
+            'domain' => $_SERVER['HTTP_HOST'],  // Dynamic domain
+            'secure' => isset($_SERVER['HTTPS']),  // Secure if HTTPS is used
             'httponly' => true,
             'samesite' => 'Strict'
         ]);
+
         session_start();
-
-        // Regenerate session ID to prevent session fixation attacks
-        session_regenerate_id(true);
-    } else {
-        // Regenerate session if already started to prevent fixation
-        session_regenerate_id(true);
+        session_regenerate_id(true);  // Regenerate session ID to prevent fixation
     }
-
-    // Setup a cookie directly to specify SameSite attribute if needed
-    setcookie(session_name(), session_id(), [
-        'samesite' => 'Strict',
-        'secure' => false,  // Set to true if using HTTPS
-        'httponly' => true,
-        'path' => '/',
-        'domain' => 'localhost'
-    ]);
 }
 
+<<<<<<< HEAD
 //Implement CSP
 function setCSP()
 {
@@ -44,7 +33,28 @@ function setCSP()
         " frame-src 'none';" .
         " font-src 'self' https://fonts.gstatic.com;" .
         " connect-src 'self';";
+=======
+// Implement CSP
+function setCSP() {
+    $csp = "Content-Security-Policy: " .
+           "default-src 'self';" .
+           "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://ajax.googleapis.com https://kit.fontawesome.com;" .
+           "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://ka-f.fontawesome.com;" .
+           "img-src 'self' https://trusted-image-source.com;" . // Include trusted image sources
+           "media-src 'self' https://trusted-media-source.com;" . // Include trusted media sources (audio, video)
+           "frame-src 'none';" .
+           "font-src 'self' https://fonts.gstatic.com https://ka-f.fontawesome.com;" .
+           "connect-src 'self';";
+>>>>>>> e57f44d0044c7655a3fdceaaaa7ea2368847ebfc
     header($csp);
+
+    // Additional security headers
+    header("X-Content-Type-Options: nosniff");
+    header("X-Frame-Options: DENY");
+    header("X-XSS-Protection: 1; mode=block");
+    if (isset($_SERVER['HTTPS'])) {
+        header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
+    }
 }
 
 function generateCsrfToken()
@@ -62,3 +72,7 @@ function validateCsrfToken($token)
 
 startSecureSession();
 setCSP();
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> e57f44d0044c7655a3fdceaaaa7ea2368847ebfc

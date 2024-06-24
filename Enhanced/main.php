@@ -1,12 +1,14 @@
 <?php
 require 'security_config.php';
 require 'session_checks.php';
-startSecureSession(); $csrfToken = generateCsrfToken();
+
+// Start a secure session and generate a CSRF token
+startSecureSession();
+$csrfToken = generateCsrfToken();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -19,31 +21,14 @@ startSecureSession(); $csrfToken = generateCsrfToken();
     <script src="Javascript/Index.js"></script>
     <script src="Javascript/Surprise.js"></script>
     <script src="Javascript/Index-alert.js"></script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://ajax.googleapis.com https://kit.fontawesome.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net;">
 </head>
 
 <body ononline="onFunction()" onoffline="offFunction()">
-
-    <nav class="nav-container">
-        <a class="logo-link" href="main.php">
-            <div class="logo-container">
-                <img class="logo-img" src="Image/Hotel logo.png" alt="Hotel Logo" />
-                <h4>Flower Hotel</h4>
-            </div>
-        </a>
-        <input type="checkbox" id="click" />
-        <label for="click" class="menu-btn">
-            <i class="fas fa-bars"></i>
-        </label>
-        <ul class="list-link-container">
-            <li><a class="active" href="main.php">Home</a></li>
-            <li><a class="pasive" href="booking.php">Booking</a></li>
-            <li><a class="pasive" href="Room.html">Room</a></li>
-            <li><a class="pasive" href="Facility.html">Facility</a></li>
-            <li><a class="pasive" href="About Us.html">About Us</a></li>
-            <li><a class="pasive" href="Contact.html">Contact Us</a></li>
-            <li><a class="pasive" href="logout.php">Logout</a></li>
-        </ul>
-    </nav>
+    
+    <header class="header">
+        <?php include 'header.php';?>
+    </header>
 
     <section class="flexbox-container">
         <div class="flexbox f1">
@@ -62,5 +47,4 @@ startSecureSession(); $csrfToken = generateCsrfToken();
     </audio>
     <script src="https://kit.fontawesome.com/57086d82eb.js" crossorigin="anonymous"></script>
 </body>
-
 </html>

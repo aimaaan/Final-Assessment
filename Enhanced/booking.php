@@ -1,83 +1,83 @@
 <?php
-    require 'db.php';
-    $error_first_name = '';
-    $error_last_name = '';
-    $error_phone = '';
-    $error_email = '';
-    $error_checkin = '';
-    $error_checkout = '';
-    $error_adult = '';
-    $error_children = '';
+session_start();  // This should be at the very beginning
+
+require 'db.php';
+require 'security_config.php';
+
+// CSRF Token Generation and Validation
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+function sanitizeInput($data) {
+    return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
+}
+
+$error_first_name = '';
+$error_last_name = '';
+$error_phone = '';
+$error_email = '';
+$error_checkin = '';
+$error_checkout = '';
+$error_adult = '';
+$error_children = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die('Invalid CSRF token');
+    }
 
-    $first_name = trim($_POST["first_name"]);
-    $last_name = trim($_POST["last_name"]);
-    $phone = trim($_POST["phone"]);
-    $email = trim($_POST["email"]);
-    $checkin = trim($_POST["checkin"]);
-    $checkout = trim($_POST["checkout"]);
-    $adult = trim($_POST["adult"]);
-    $children = trim($_POST["children"]);
+    $first_name = sanitizeInput(trim($_POST["first_name"]));
+    $last_name = sanitizeInput(trim($_POST["last_name"]));
+    $phone = sanitizeInput(trim($_POST["phone"]));
+    $email = sanitizeInput(trim($_POST["email"]));
+    $checkin = sanitizeInput(trim($_POST["checkin"]));
+    $checkout = sanitizeInput(trim($_POST["checkout"]));
+    $adult = sanitizeInput(trim($_POST["adult"]));
+    $children = sanitizeInput(trim($_POST["children"]));
 
     if (empty($first_name)) {
         $error_first_name = "First Name is required";
     } elseif (!preg_match("/^[a-zA-Z ]*$/", $first_name)) {
         $error_first_name = "Only letters and white space allowed";
-    } else {
-        $error_first_name = "";
     }
 
     if (empty($last_name)) {
         $error_last_name = "Last Name is required";
     } elseif (!preg_match("/^[a-zA-Z ]*$/", $last_name)) {
         $error_last_name = "Only letters and white space allowed";
-    } else {
-        $error_last_name = "";
     }
 
     if (empty($phone)) {
         $error_phone = "Phone is required";
     } elseif (!preg_match("/^\d{10}$/", $phone)) {
         $error_phone = "Invalid phone number format";
-    } else {
-        $error_phone = "";
-    }    
+    }
 
     if (empty($email)) {
         $error_email = "Email is required";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error_email = "Invalid email format";
-    } else {
-        $error_email = "";
     }
 
     if (empty($checkin)) {
         $error_checkin = "Check-in Date is required";
-    } else {
-        $error_checkin = "";
     }
 
     if (empty($checkout)) {
         $error_checkout = "Check-out Date is required";
-    } else {
-        $error_checkout = "";
     }
 
     if (empty($adult)) {
         $error_adult = "Number of Adults is required";
     } elseif (!ctype_digit($adult)) {
         $error_adult = "Please enter a valid integer";
-    } else {
-        $error_adult = "";
     }
 
     if (empty($children)) {
         $error_children = "Number of Children is required";
     } elseif (!ctype_digit($children)) {
         $error_children = "Please enter a valid integer";
-    } else {
-        $error_children = "";
     }
 
     if (empty($error_first_name) && empty($error_last_name) && empty($error_phone) && empty($error_email) && empty($error_checkin) && empty($error_checkout) && empty($error_adult) && empty($error_children)) {
@@ -114,33 +114,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="Javascript/onoffline.js"></script>
     <script src="Javascript/Hide_form.js"></script>
 </head>
-
 <body ononline="onFunction()" onoffline="offFunction()">
 
-    <nav>
-        <a class="logo-link" href="main.php">
-            <nav class="nav-container">
-                <div class="logo-container">
-                    <img class="logo-img" src="Image/Hotel logo.png" />
-                    <h4>Flower Hotel</h4>
-                </div>
-        </a>
-
-        <input type="checkbox" id="click" />
-        <label for="click" class="menu-btn">
-            <i class="fas fa-bars"></i>
-        </label>
-
-        <ul class="list-link-container">
-            <li><a class="pasive" href="main.php">Home</a></li>
-            <li><a class="active" href="booking.php">Booking</a></li>
-            <li><a class="pasive" href="Room.html">Room</a></li>
-            <li><a class="pasive" href="Facility.html">Facility</a></li>
-            <li><a class="pasive" href="About Us.html">About Us</a></li>
-            <li><a class="pasive" href="Contact.html">Contact Us</a></li>
-            <li><a class="pasive" href="logout.php">Logout</a></li>
-        </ul>
-    </nav>
+    <header class="header">
+        <?php include 'header.php';?>
+    </header>
 
     <div class="container-title">Booking</div>
 
@@ -164,6 +142,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="container">
             <div class="content">
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="form">
+                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
                     <div class="user_details">
                         <div class="input_box">
                             <label for="first_name">First Name :</label>
@@ -237,6 +216,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </div>
+
     <script src="https://kit.fontawesome.com/57086d82eb.js" crossorigin="anonymous"></script>
 </body>
 </html>
