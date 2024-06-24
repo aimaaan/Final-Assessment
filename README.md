@@ -197,10 +197,14 @@ a. Generate CSRF token and store it in the session when it is not already presen
 ![image](https://github.com/aimaaan/Final-Assessment/assets/92367771/1b941526-32bd-4b2a-ae80-109352203db8)
 
 b. Implement a strict CSP policy.
+- Content Security Policy (CSP) is a security feature designed to prevent XSS attacks by restricting the resources that can be loaded on a web page.
 
 ![image](https://github.com/aimaaan/Final-Assessment/assets/92367771/be13cde8-8ee6-4472-bdc4-10c731eb065f)
 
 ### 6. Database Security Principles - prevent SQL injection [zafran]
+a. Sanitize all user inputs before processing them. 
+- This can be achieved by escaping special characters and filtering input data.
+
 ![image](https://github.com/aimaaan/Final-Assessment/assets/92367771/ea83cc59-a445-40b3-ad97-44b3f5304324)
 ![image](https://github.com/aimaaan/Final-Assessment/assets/92367771/695f4218-10c2-46fc-95df-2cab3e0f4ed4)
 
