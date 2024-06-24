@@ -44,7 +44,8 @@ The authors of the file additions/enhancements are encased in square brackets as
 - nas
 - [zafran] refers to [Muhammad Zafran bin Zamani](https://github.com/zafranzamani)
 
-1. Added user authentication pages which are: [aiman]
+### 1. Authentication
+a. Added user authentication pages which are: [aiman]
    -  [registration.php](Enhanced/registration.php), [register.php](Enhanced/register.php)
    -  [index.php](Enhanced/index.php), [login.php](Enhanced/login.php)
 
@@ -52,8 +53,9 @@ The authors of the file additions/enhancements are encased in square brackets as
   The file are: 
    -  [qr.php](Enhanced/qr.php)
    -  [qr_verify.php](Enhanced/qr_verify.php)
- 
-2. Implementing user authorisation by using role-based access control(RBAC) on database level. [aiman]
+
+### 2. Authorisation
+a. Implementing user authorisation by using role-based access control(RBAC) on database level. [aiman]
    - roles consist of admin, user, guest
    - each pages will check for role
    - admin able to access admin dashboard pages and can create, read, update and delete user booking form -> [booking_crud.php](Enhanced/booking_crud.php)
