@@ -105,12 +105,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="Styles/NavigationBar.css">
     <link rel="stylesheet" href="Styles/Booking_style.css">
-    <script src="Javascript/onoffline.js"></script>
     <script src="Javascript/Book.js"></script>
+    <script src="Javascript/onoffline.js"></script>
     <script src="Javascript/Hide_form.js"></script>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://ajax.googleapis.com https://kit.fontawesome.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net;">
 </head>
 <body ononline="onFunction()" onoffline="offFunction()">
 
