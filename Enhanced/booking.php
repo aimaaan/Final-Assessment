@@ -4,6 +4,17 @@ session_start();  // This should be at the very beginning
 require 'db.php';
 require 'security_config.php';
 
+// Start secure session and set CSP headers
+startSecureSession();
+setCSP();
+
+// Check if the user is logged in and has the 'User' or 'Admin' role
+if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['User', 'Admin'])) {
+    // If not a user or admin, redirect to an unauthorized access page
+    echo "<script>alert('You are not authorized to access this page. Please Sign in');</script>";
+    exit();
+}
+
 // CSRF Token Generation and Validation
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));

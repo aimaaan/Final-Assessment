@@ -85,6 +85,13 @@ unset($_SESSION['error']);
                     <button type="submit" name="login" id="login" class="btn btn-primary w-100">Login</button>
                     <p class="mt-3 text-center">Don't have an account? <a href="registration.php">Sign up</a></p>
                 </form>
+
+                <form action="guest_login.php" method="POST">
+                    <?php $guest_csrf_token = generateCsrfToken(); ?>
+                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($guest_csrf_token, ENT_QUOTES, 'UTF-8'); ?>">
+                    <button type="submit" class="btn btn-secondary w-100 mt-3">Continue as Guest</button>
+                </form>
+                
             </div>
         </section>
     </section>
