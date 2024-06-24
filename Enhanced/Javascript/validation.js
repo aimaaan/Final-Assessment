@@ -8,9 +8,9 @@ function validateForm() {
         return false;
     }
 
-    var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{12,}$/;
     if (!passwordPattern.test(password)) {
-        alert("Password must be between 6 and 20 characters and include at least one numeric digit, one uppercase, and one lowercase letter.");
+        alert("Password must be at least 12 characters long and include at least one numeric digit, one uppercase letter, one lowercase letter, and one special character.");
         return false;
     }
     
