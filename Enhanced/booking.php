@@ -1,83 +1,82 @@
 <?php
-    require 'db.php';
-    $error_first_name = '';
-    $error_last_name = '';
-    $error_phone = '';
-    $error_email = '';
-    $error_checkin = '';
-    $error_checkout = '';
-    $error_adult = '';
-    $error_children = '';
+require 'db.php';
+
+session_start();
+
+// CSRF Token Generation and Validation
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+function sanitizeInput($data) {
+    return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
+}
+
+$error_first_name = '';
+$error_last_name = '';
+$error_phone = '';
+$error_email = '';
+$error_checkin = '';
+$error_checkout = '';
+$error_adult = '';
+$error_children = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die('Invalid CSRF token');
+    }
 
-    $first_name = trim($_POST["first_name"]);
-    $last_name = trim($_POST["last_name"]);
-    $phone = trim($_POST["phone"]);
-    $email = trim($_POST["email"]);
-    $checkin = trim($_POST["checkin"]);
-    $checkout = trim($_POST["checkout"]);
-    $adult = trim($_POST["adult"]);
-    $children = trim($_POST["children"]);
+    $first_name = sanitizeInput(trim($_POST["first_name"]));
+    $last_name = sanitizeInput(trim($_POST["last_name"]));
+    $phone = sanitizeInput(trim($_POST["phone"]));
+    $email = sanitizeInput(trim($_POST["email"]));
+    $checkin = sanitizeInput(trim($_POST["checkin"]));
+    $checkout = sanitizeInput(trim($_POST["checkout"]));
+    $adult = sanitizeInput(trim($_POST["adult"]));
+    $children = sanitizeInput(trim($_POST["children"]));
 
     if (empty($first_name)) {
         $error_first_name = "First Name is required";
     } elseif (!preg_match("/^[a-zA-Z ]*$/", $first_name)) {
         $error_first_name = "Only letters and white space allowed";
-    } else {
-        $error_first_name = "";
     }
 
     if (empty($last_name)) {
         $error_last_name = "Last Name is required";
     } elseif (!preg_match("/^[a-zA-Z ]*$/", $last_name)) {
         $error_last_name = "Only letters and white space allowed";
-    } else {
-        $error_last_name = "";
     }
 
     if (empty($phone)) {
         $error_phone = "Phone is required";
     } elseif (!preg_match("/^\d{10}$/", $phone)) {
         $error_phone = "Invalid phone number format";
-    } else {
-        $error_phone = "";
-    }    
+    }
 
     if (empty($email)) {
         $error_email = "Email is required";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error_email = "Invalid email format";
-    } else {
-        $error_email = "";
     }
 
     if (empty($checkin)) {
         $error_checkin = "Check-in Date is required";
-    } else {
-        $error_checkin = "";
     }
 
     if (empty($checkout)) {
         $error_checkout = "Check-out Date is required";
-    } else {
-        $error_checkout = "";
     }
 
     if (empty($adult)) {
         $error_adult = "Number of Adults is required";
     } elseif (!ctype_digit($adult)) {
         $error_adult = "Please enter a valid integer";
-    } else {
-        $error_adult = "";
     }
 
     if (empty($children)) {
         $error_children = "Number of Children is required";
     } elseif (!ctype_digit($children)) {
         $error_children = "Please enter a valid integer";
-    } else {
-        $error_children = "";
     }
 
     if (empty($error_first_name) && empty($error_last_name) && empty($error_phone) && empty($error_email) && empty($error_checkin) && empty($error_checkout) && empty($error_adult) && empty($error_children)) {
@@ -106,24 +105,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book</title>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="Styles/NavigationBar.css">
     <link rel="stylesheet" href="Styles/Booking_style.css">
-    <script src="Javascript/Book.js"></script>
     <script src="Javascript/onoffline.js"></script>
+    <script src="Javascript/Book.js"></script>
     <script src="Javascript/Hide_form.js"></script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://ajax.googleapis.com https://kit.fontawesome.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net;">
 </head>
-
 <body ononline="onFunction()" onoffline="offFunction()">
 
     <nav>
         <a class="logo-link" href="main.php">
-            <nav class="nav-container">
-                <div class="logo-container">
-                    <img class="logo-img" src="Image/Hotel logo.png" />
-                    <h4>Flower Hotel</h4>
-                </div>
+            <div class="logo-container">
+                <img class="logo-img" src="Image/Hotel logo.png" />
+                <h4>Flower Hotel</h4>
+            </div>
         </a>
 
         <input type="checkbox" id="click" />
@@ -161,84 +157,84 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div> 
 
     <div class="body">
-    <div class="container">
-        <div class="content">
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="form">
-                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
-                <div class="user_details">
-                    <div class="input_box">
-                        <label for="first_name">First Name :</label>
-                        <input type="text" name="first_name" id="first_name" required>
-                        <?php if (!empty($error_first_name)) : ?>
-                            <p style="color: red;"><?php echo htmlspecialchars($error_first_name); ?></p>
-                        <?php endif; ?>
+        <div class="container">
+            <div class="content">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="form">
+                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+                    <div class="user_details">
+                        <div class="input_box">
+                            <label for="first_name">First Name :</label>
+                            <input type="text" name="first_name" id="first_name" required>
+                            <?php if (!empty($error_first_name)) : ?>
+                                <p style="color: red;"><?php echo htmlspecialchars($error_first_name); ?></p>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="input_box">
+                            <label for="last_name">Last Name :</label>
+                            <input type="text" name="last_name" id="last_name" required>
+                            <?php if (!empty($error_last_name)) : ?>
+                                <p style="color: red;"><?php echo htmlspecialchars($error_last_name); ?></p>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="input_box">
+                            <label for="phone">Phone no. :</label>
+                            <input type="text" name="phone" id="phone" required>
+                            <?php if (!empty($error_phone)) : ?>
+                                <p style="color: red;"><?php echo htmlspecialchars($error_phone); ?></p>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="input_box">
+                            <label for="email">Email :</label>
+                            <input type="email" name="email" id="email" required>
+                            <?php if (!empty($error_email)) : ?>
+                                <p style="color: red;"><?php echo htmlspecialchars($error_email); ?></p>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="input_box">
+                            <label for="checkin">Check-in :</label>
+                            <input type="date" name="checkin" id="checkin" required>
+                            <?php if (!empty($error_checkin)) : ?>
+                                <p style="color: red;"><?php echo htmlspecialchars($error_checkin); ?></p>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="input_box">
+                            <label for="checkout">Check-out :</label>
+                            <input type="date" name="checkout" id="checkout" required>
+                            <?php if (!empty($error_checkout)) : ?>
+                                <p style="color: red;"><?php echo htmlspecialchars($error_checkout); ?></p>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="input_box">
+                            <label for="adult">No. of Adults :</label>
+                            <input type="number" name="adult" id="adult" required>
+                            <?php if (!empty($error_adult)) : ?>
+                                <p style="color: red;"><?php echo htmlspecialchars($error_adult); ?></p>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="input_box">
+                            <label for="children">No. of Children :</label>
+                            <input type="number" name="children" id="children" required>
+                            <?php if (!empty($error_children)) : ?>
+                                <p style="color: red;"><?php echo htmlspecialchars($error_children); ?></p>
+                            <?php endif; ?>
+                        </div>
                     </div>
 
-                    <div class="input_box">
-                        <label for="last_name">Last Name :</label>
-                        <input type="text" name="last_name" id="last_name" required>
-                        <?php if (!empty($error_last_name)) : ?>
-                            <p style="color: red;"><?php echo htmlspecialchars($error_last_name); ?></p>
-                        <?php endif; ?>
+                    <div class="button">
+                        <input type="submit" value="Submit">
                     </div>
-
-                    <div class="input_box">
-                        <label for="phone">Phone no. :</label>
-                        <input type="text" name="phone" id="phone" required>
-                        <?php if (!empty($error_phone)) : ?>
-                            <p style="color: red;"><?php echo htmlspecialchars($error_phone); ?></p>
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="input_box">
-                        <label for="email">Email :</label>
-                        <input type="email" name="email" id="email" required>
-                        <?php if (!empty($error_email)) : ?>
-                            <p style="color: red;"><?php echo htmlspecialchars($error_email); ?></p>
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="input_box">
-                        <label for="checkin">Check-in :</label>
-                        <input type="date" name="checkin" id="checkin" required>
-                        <?php if (!empty($error_checkin)) : ?>
-                            <p style="color: red;"><?php echo htmlspecialchars($error_checkin); ?></p>
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="input_box">
-                        <label for="checkout">Check-out :</label>
-                        <input type="date" name="checkout" id="checkout" required>
-                        <?php if (!empty($error_checkout)) : ?>
-                            <p style="color: red;"><?php echo htmlspecialchars($error_checkout); ?></p>
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="input_box">
-                        <label for="adult">No. of Adults :</label>
-                        <input type="number" name="adult" id="adult" required>
-                        <?php if (!empty($error_adult)) : ?>
-                            <p style="color: red;"><?php echo htmlspecialchars($error_adult); ?></p>
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="input_box">
-                        <label for="children">No. of Children :</label>
-                        <input type="number" name="children" id="children" required>
-                        <?php if (!empty($error_children)) : ?>
-                            <p style="color: red;"><?php echo htmlspecialchars($error_children); ?></p>
-                        <?php endif; ?>
-                    </div>
-                </div>
-
-                <div class="button">
-                    <input type="submit" value="Submit">
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-    </div>
+
     <script src="https://kit.fontawesome.com/57086d82eb.js" crossorigin="anonymous"></script>
 </body>
 </html>
