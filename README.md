@@ -164,7 +164,7 @@ a. Enhanced the booking form
 - When all the inputs are validated, it will go to the database.
 
 ### 4. File Security principles
-a. implement the code that enables the right-click for login and registration pages.
+a. implement the code that disables the right-click for login and registration pages.
 
  ```php
 <script>
