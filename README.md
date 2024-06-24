@@ -52,10 +52,13 @@ The authors of the file additions/enhancements are encased in square brackets as
   The file are: 
    -  [qr.php](Enhanced/qr.php)
    -  [qr_verify.php](Enhanced/qr_verify.php)
-
-2. Added user authorisation pages which are: [aiman]
-   - 
-
-
+ 
+2. Implementing user authorisation by using role-based access control(RBAC) on database level. [aiman]
+   - roles consist of admin, user, guest
+   - each pages will check for role
+   - admin able to access admin dashboard pages and can create, read, update and delete user booking form -> [booking_crud.php](Enhanced/booking_crud.php)
+   - user able to access all main pages of the flower hotel website including submit the booking form.
+   - guest can login without authentication when click login as guest however, guest role is unable to submit the booking form. Only user are given permission to do so
+  
 ## References
 1. Webappsec class handouts from our course instructor: [Dr. Muhamad Sadry Abu Seman](https://github.com/muhdsadry), DIS, KICT, IIUM
