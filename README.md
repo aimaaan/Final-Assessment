@@ -163,11 +163,15 @@ The session checks are include at each important pages such as:
    - Destroying session Id are also enable on everytime user logged out. using ``session_destroy()`` and ``session_unset();`` in [logout.php](Enhanced/logout.php)
 
 ### 3.Input Validation [Nasrullah]
-a. Enhanced the booking form 
-- Implement the regex for the booking for all the input.
-- User need to enter all the data required by the form before submitting it following the regex. 
-- When all the inputs are validated, it will go to the database.
-
+a.Enhanced the [booking.php](Enhanced/booking.php) 
+- Using method( Regular Expression Patterns (Regex Patterns) )
+  -- We are using Regex because it is a great method to use since it can prevent the SQL injection by limiting the user to key in the data using all characters instead they only can fill up the data using the allowed regex patterns.
+  ![image](https://github.com/aimaaan/Final-Assessment/assets/106076684/6d408731-962e-44c8-b5c5-39e3ac1a8cfe)
+- Client Side validation
+  -- Below is our client-side validation 
+  ![image](https://github.com/aimaaan/Final-Assessment/assets/106076684/b99903fa-573f-4324-ac68-601d2773931d)
+  -- When the client has fill up the data then they will received the pop up notifications
+  ![image](https://github.com/aimaaan/Final-Assessment/assets/106076684/d8809e50-a7e4-4b2d-8b6a-265b643934a5)
 ### 4. File Security principles [Nasrullah]
 a. implement the code that disables the right-click for login and registration pages.
 
