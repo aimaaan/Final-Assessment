@@ -20,20 +20,6 @@ function startSecureSession() {
     }
 }
 
-<<<<<<< HEAD
-//Implement CSP
-function setCSP()
-{
-    $csp = "Content-Security-Policy: default-src 'self';" .
-        " script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js;" .
-        " object-src 'none';" .
-        " style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com;" .
-        " img-src 'self';" .
-        " media-src 'none';" .
-        " frame-src 'none';" .
-        " font-src 'self' https://fonts.gstatic.com;" .
-        " connect-src 'self';";
-=======
 // Implement CSP
 function setCSP() {
     $csp = "Content-Security-Policy: " .
@@ -45,7 +31,6 @@ function setCSP() {
            "frame-src 'none';" .
            "font-src 'self' https://fonts.gstatic.com https://ka-f.fontawesome.com;" .
            "connect-src 'self';";
->>>>>>> e57f44d0044c7655a3fdceaaaa7ea2368847ebfc
     header($csp);
 
     // Additional security headers
@@ -72,7 +57,3 @@ function validateCsrfToken($token)
 
 startSecureSession();
 setCSP();
-<<<<<<< HEAD
-=======
-?>
->>>>>>> e57f44d0044c7655a3fdceaaaa7ea2368847ebfc
