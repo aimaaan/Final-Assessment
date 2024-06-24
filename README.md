@@ -135,7 +135,8 @@ function startSecureSession() {
 }
 ```
 #### c. Implementing server side authorization.
-   - Checks the role of the user for each page. If the role are permissable then it can access the page. For example:
+   - Checks the role of the user for each page. If the role are permissable then it can access the page. It will always checks the role on the database. For example:
+     
 ```php
 // Check if the user is logged in and has the 'User' or 'Admin' role
 if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['User', 'Admin'])) {
@@ -144,7 +145,10 @@ if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['User', 'Admin
     exit();
 }
 ```
-
+The session checks are include at each important pages such as:
+ - [booking.php](Enhanced/booking.php)
+ - [booking_crud.php](Enhanced/booking_crud.php)
+  
 ### 3.Input Validation
 a. Enhanced the booking form 
 - Implement the regex for the booking for all the input.
