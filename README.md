@@ -96,7 +96,7 @@ The authors of the file additions/enhancements are encased in square brackets as
      
 
 ### 2. Authorisation [aiman]
-a. Implementing user authorisation by using role-based access control(RBAC) on database level. 
+#### a. Implementing user authorisation by using role-based access control(RBAC) on database level. 
    - roles consist of admin, user, guest
    - each pages will check for role
    - admin able to access admin dashboard pages and can create, read, update and delete user booking form -> [booking_crud.php](Enhanced/booking_crud.php)
@@ -109,6 +109,32 @@ $_SESSION['username'] = 'Guest'; // Assign 'Guest' as the username
 $_SESSION['user_id'] = 3;        // Use 0 as the guest user ID
 $_SESSION['role'] = 'Guest';     // Set the role to 'Guest'
 ```
+#### b. Implementing secure session management.
+   - Implemented on [security_config.php](Enhanced/security_config.php), using ``startSecureSession()``, Ensures setting secure cookie parameters and regenerating the session ID to prevent session fixation attacks.
+   - Thus, In order to implemented to other pages, it need to include ``security_config.php`` at the Beginning of Each Page. This will initialize the secure session and set the necessary security headers of that pages. 
+     
+```php
+function startSecureSession() {
+    if (session_status() === PHP_SESSION_NONE) {
+        
+        ini_set('session.use_only_cookies', 1);
+        
+        $cookieParams = session_get_cookie_params();
+        session_set_cookie_params([
+            'lifetime' => $cookieParams["lifetime"],
+            'path' => $cookieParams["path"],
+            'domain' => $_SERVER['HTTP_HOST'],  
+            'secure' => isset($_SERVER['HTTPS']),  
+            'httponly' => true,
+            'samesite' => 'Strict'
+        ]);
+
+        session_start();
+        session_regenerate_id(true);  
+    }
+}
+```
+
 
 ### 3.Input Validation
 a. Enhanced the booking form 
