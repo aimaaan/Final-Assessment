@@ -41,7 +41,7 @@ if (basename($_SERVER['PHP_SELF']) == 'index.php' && isset($_SESSION['redirect_a
 // Function to authorize user based on roles
 function authorize($allowed_roles) {
     if (!in_array($_SESSION['role'], $allowed_roles)) {
-        header('Location: unauthorized.php');
+        echo "You are not authorized to view this page.";
         exit();
     }
 }
