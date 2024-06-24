@@ -190,6 +190,11 @@ c. Shortened the URL is being implemented by creating .htacces file in htdocs to
 - Doc '.htaccess' is shown below
 ![image](https://github.com/aimaaan/Final-Assessment/assets/106076684/59a26529-d540-4ee6-9c55-f315f1fd60ec)
 
+### 5. XSS and CSRF Prevention  [zafran]
+a. generate a CSRF token and store it in the session when it is not already present.
+- token is created using bin2hex(random_bytes(32)), which ensures a cryptographically token.
+- ![image](https://github.com/aimaaan/Final-Assessment/assets/92367771/b5a529e6-c3ad-45f6-8abc-39842148585f)
+
 
 ### Weekly Progress Report
 [Weekly.Progress.Report.-.Google.Docs.pdf](https://github.com/user-attachments/files/15955825/Weekly.Progress.Report.-.Google.Docs.pdf)
