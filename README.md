@@ -45,22 +45,58 @@ The authors of the file additions/enhancements are encased in square brackets as
 - [zafran] refers to [Muhammad Zafran bin Zamani](https://github.com/zafranzamani)
 
 ### 1. Authentication [aiman]
-#### a. Securing password-based authentication using hashed password and generate secret key for 2FA
-   - the password complexity are set Numbers + Lowercase Letters + Uppercase letters + symbols + at least 12 characters by using regex: ``'/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{12,}$/'``
+   #### a. Securing password-based authentication using hashed password and generate secret key for 2FA
+   - the password complexity are set Numbers + Lowercase Letters + Uppercase letters + symbols + at least 12 characters by using regex: ``'/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{12,}$/'`` at [register.php](Enhanced/register.php)
    - password are hashed using ``password_hash($password, PASSWORD_DEFAULT);`` in [register.php](Enhanced/register.php) & verify ``password_verify($password, $user['password']))`` at [login.php](Enhanced/login.php)
-#### b. Implementing two-factor Authentication (2FA) & Added user authentication pages which are:
-   - [registration.php](Enhanced/registration.php), [register.php](Enhanced/register.php)
-   -  [index.php](Enhanced/index.php), [login.php](Enhanced/login.php)
 
-  using sonata-project/google-authenticator: Google Authenticator library to generate qr code and provide otp via google authenticator app for authentication.
-  The file are: 
-   -  [qr.php](Enhanced/qr.php)
-   -  [qr_verify.php](Enhanced/qr_verify.php)
+   #### b. Disable password with the same username and reusing the same password as previous password if same username registered
+   - Password must not be the same as username at [register.php](Enhanced/register.php)
+   - Password are disable to reuse the same password as previous if the same username register again in [register.php](Enhanced/register.php)
 
-After registration, user will redirecting to [qr.php](Enhanced/qr.php) to scan and verify via their otp number on google authenticator apps. Then, it will redirect user to [index.php](Enhanced/index.php) for login and verify their otp value again.
+     ```php
+      $password_pattern = '/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{12,}$/';
+          if (empty($password)) {
+              $error_password = "Password is required.";
+          } elseif (!preg_match($password_pattern, $password)) {
+              $error_password = "Password must be at least 12 characters long and include at least one number, one lowercase letter, one uppercase letter, and one special character.";
+          } elseif ($password === $username) {
+              $error_password = "Password cannot be the same as the username.";
+          } else {
+              $stmt = $pdo->prepare('SELECT password FROM previous_passwords WHERE username = :username');
+              $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+              $stmt->execute();
+              $previous_passwords = $stmt->fetchAll(PDO::FETCH_COLUMN);
+              foreach ($previous_passwords as $previous_password) {
+                  if (password_verify($password, $previous_password)) {
+                      $error_password = "You cannot reuse a previous password.";
+                      break;
+                  }
+              }
+          }
+        ```
 
-### 2. Authorisation
-a. Implementing user authorisation by using role-based access control(RBAC) on database level. [aiman]
+      #### c. Enable account lockout and disable autocomplete 
+      - Allow account to be lockout if failed attempt more than 5 times and timeframe are recorded in the database. 
+      - The duration of account lockout are set 15min and it will automatically reset. The code implementation are in [login.php](Enhanced/login.php).
+      - Disable autocomplete for each input by using ``autocomplete="off"`` 
+       
+      #### d. Implementing two-factor Authentication (2FA) & Added user authentication pages which are:
+      - [registration.php](Enhanced/registration.php), [register.php](Enhanced/register.php)
+      -  [index.php](Enhanced/index.php), [login.php](Enhanced/login.php)
+
+     using sonata-project/google-authenticator: Google Authenticator library to generate qr code and provide otp via google authenticator app for authentication.
+     The file are: 
+      -  [qr.php](Enhanced/qr.php)
+      -  [qr_verify.php](Enhanced/qr_verify.php)
+
+      After registration, user will redirecting to [qr.php](Enhanced/qr.php) to scan and verify via their otp number on google authenticator apps. Then, it will redirect user to [index.php](Enhanced/index.php) for login and verify their otp value again.
+
+      #### e. Implementing secure web transmission by using encrypted channel (SSL)
+      ![SSL HTTPS](https://github.com/aimaaan/Final-Assessment/assets/99475237/e20dab77-206f-41a5-9ac8-c0354379377c)
+     
+
+### 2. Authorisation [aiman]
+a. Implementing user authorisation by using role-based access control(RBAC) on database level. 
    - roles consist of admin, user, guest
    - each pages will check for role
    - admin able to access admin dashboard pages and can create, read, update and delete user booking form -> [booking_crud.php](Enhanced/booking_crud.php)
