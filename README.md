@@ -75,7 +75,8 @@ The authors of the file additions/enhancements are encased in square brackets as
           }
         ```
      ![previouspassword](https://github.com/aimaaan/Final-Assessment/assets/99475237/626195b1-d788-429e-94c2-cd2019fa77bc)
-      Everytime user register, password are stored in ``previous_passwords table`` with timeframe. If same user want to register, it will refer to this table and disable same password for registration. 
+
+     Everytime user register, password are stored in ``previous_passwords table`` with timeframe. If same user want to register, it will refer to this table and disable same password for registration. 
       
       #### c. Enable account lockout and disable autocomplete 
       - Allow account to be lockout if failed attempt more than 5 times and timeframe are recorded in the database. 
