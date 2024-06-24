@@ -24,13 +24,12 @@ function startSecureSession() {
 function setCSP() {
     $csp = "Content-Security-Policy: " .
            "default-src 'self';" .
-           "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://ajax.googleapis.com;" .
-           "object-src 'none';" .
-           "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com;" .
+           "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://ajax.googleapis.com https://kit.fontawesome.com;" .
+           "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://ka-f.fontawesome.com;" .
            "img-src 'self' https://trusted-image-source.com;" . // Include trusted image sources
            "media-src 'self' https://trusted-media-source.com;" . // Include trusted media sources (audio, video)
            "frame-src 'none';" .
-           "font-src 'self' https://fonts.gstatic.com;" .
+           "font-src 'self' https://fonts.gstatic.com https://ka-f.fontawesome.com;" .
            "connect-src 'self';";
     header($csp);
 
