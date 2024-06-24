@@ -41,7 +41,7 @@ Improved version of Flower Hotel web app with security features added onto the o
 ## Enhancement
 The authors of the file additions/enhancements are encased in square brackets as such: 
 - [aiman] refers to [Ahmad Arif Aiman bin Ahmad Fauzi](https://github.com/aimaaan)
-- nas
+- [Nasrullah] refers to [https://github.com/MuhdNasrullah]
 - [zafran] refers to [Muhammad Zafran bin Zamani](https://github.com/zafranzamani)
 
 ### 1. Authentication [aiman]
@@ -148,16 +148,24 @@ if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['User', 'Admin
 The session checks are include at each important pages such as:
  - [booking.php](Enhanced/booking.php)
  - [booking_crud.php](Enhanced/booking_crud.php)
-  
+
+#### c. Implementing regenerating session ids on Authentication and logging out
+   - using ``startSecureSession()`` function on [security_config.php](Enhanced/security_config.php), it can also regenerate session id for every new login to avoid reuse the same sessionIDs.
+   - There are also logout at nav bar to allow user to logout with a single click and invalidate any active session and contents. it uses [logout.php](Enhanced/logout.php) to destroy session everytime user logout.
+     
+#### d. Implementing httponly flag and destroying invalidated session id
+   - Implemented on [security_config.php](Enhanced/security_config.php), set the ``httponly = true;`` to Ensure all cookies, including session cookies, use the HttpOnly flag.
+   - Destroying session Id are also enable on everytime user logged out. using ``session_destroy()`` and ``session_unset();`` in [logout.php](Enhanced/logout.php) 
+
 ### 3.Input Validation
 a. Enhanced the booking form 
 - Implement the regex for the booking for all the input.
 - User need to enter all the data required by the form before submitting it following the regex. 
-- When all the inputs are validated, it will go to the database. 
+- When all the inputs are validated, it will go to the database.
 
 ### 4. File Security principles
 a. implement the code that enables the right-click for login and registration pages.
-- 
+
  ```php
 <script>
     window.oncontextmenu = function() {
@@ -167,11 +175,16 @@ a. implement the code that enables the right-click for login and registration pa
 ```
 
 b. Adding the robots.txt
-- 'robots.txt' is to make sure that web crawlers cannot request from our site. 
+- 'robots.txt' is to make sure that web crawlers cannot request from our site.
+  
+c. Shortened the URL is being implemented by creating .htacces file in htdocs to prevent any URL rewriting which can lead the attackers to make any changes to the folders.
+- Doc '.htaccess' is shown below
+![image](https://github.com/aimaaan/Final-Assessment/assets/106076684/59a26529-d540-4ee6-9c55-f315f1fd60ec)
 
 
 ### Weekly Progress Report
-[Weekly Progress Report - Google Docs.pdf](https://github.com/user-attachments/files/15954439/Weekly.Progress.Report.-.Google.Docs.pdf)
+[Weekly.Progress.Report.-.Google.Docs.pdf](https://github.com/user-attachments/files/15955825/Weekly.Progress.Report.-.Google.Docs.pdf)
+
 
 ## References
 1. Webappsec class handouts from our course instructor: [Dr. Muhamad Sadry Abu Seman](https://github.com/muhdsadry), DIS, KICT, IIUM
