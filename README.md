@@ -102,6 +102,27 @@ a. Implementing user authorisation by using role-based access control(RBAC) on d
    - admin able to access admin dashboard pages and can create, read, update and delete user booking form -> [booking_crud.php](Enhanced/booking_crud.php)
    - user able to access all main pages of the flower hotel website including submit the booking form.
    - guest can login without authentication when click login as guest however, guest role is unable to submit the booking form. Only user are given permission to do so
-  
+
+### 3.Input Validation
+a. Enhanced the booking form 
+- Implement the regex for the booking for all the input.
+- User need to enter all the data required by the form before submitted it follows the regex. 
+- When all the inputs are validated, it will go to the database. 
+
+### 4. File Security principles
+a. implement the code that enables the right-click for login and registration pages.
+- This 
+...
+<script>
+    window.oncontextmenu = function() {
+        return false;
+    }
+</script>
+...
+
+
+### Weekly Progress Report
+[Weekly Progress Report - Google Docs.pdf](https://github.com/user-attachments/files/15954439/Weekly.Progress.Report.-.Google.Docs.pdf)
+
 ## References
 1. Webappsec class handouts from our course instructor: [Dr. Muhamad Sadry Abu Seman](https://github.com/muhdsadry), DIS, KICT, IIUM
