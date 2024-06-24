@@ -191,7 +191,7 @@ c. Shortened the URL is being implemented by creating .htacces file in htdocs to
 ![image](https://github.com/aimaaan/Final-Assessment/assets/106076684/59a26529-d540-4ee6-9c55-f315f1fd60ec)
 
 ### 5. XSS and CSRF Prevention  [zafran]
-a. Generate a CSRF token and store it in the session when it is not already present.
+a. Generate CSRF token and store it in the session when it is not already present.
 - generate and validate CSRF tokens for all state-changing requests and ensure the tokens are unique per session and regenerated periodically.
   
 ![image](https://github.com/aimaaan/Final-Assessment/assets/92367771/1b941526-32bd-4b2a-ae80-109352203db8)
@@ -200,7 +200,9 @@ b. Implement a strict CSP policy.
 
 ![image](https://github.com/aimaaan/Final-Assessment/assets/92367771/be13cde8-8ee6-4472-bdc4-10c731eb065f)
 
-
+### 6. Database Security Principles - prevent SQL injection [zafran]
+![image](https://github.com/aimaaan/Final-Assessment/assets/92367771/ea83cc59-a445-40b3-ad97-44b3f5304324)
+![image](https://github.com/aimaaan/Final-Assessment/assets/92367771/695f4218-10c2-46fc-95df-2cab3e0f4ed4)
 
 
 ### Weekly Progress Report
