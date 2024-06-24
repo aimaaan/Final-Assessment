@@ -1,5 +1,6 @@
 <?php
-require 'db.php';
+require 'db.php';'
+require 'security_config.php';
 
 session_start();
 
