@@ -96,13 +96,59 @@ The authors of the file additions/enhancements are encased in square brackets as
      
 
 ### 2. Authorisation [aiman]
-a. Implementing user authorisation by using role-based access control(RBAC) on database level. 
+#### a. Implementing user authorisation by using role-based access control(RBAC) on database level. 
    - roles consist of admin, user, guest
    - each pages will check for role
    - admin able to access admin dashboard pages and can create, read, update and delete user booking form -> [booking_crud.php](Enhanced/booking_crud.php)
    - user able to access all main pages of the flower hotel website including submit the booking form.
-   - guest can login without authentication when click login as guest however, guest role is unable to submit the booking form. Only user are given permission to do so
+   - guest can login without authentication when click login as guest however, guest role is unable to submit the booking form. Only user are given permission to do so.
+   - When log in as guest, guest are given by default its session variable which are username, userid and role. As shown code snippet below:
 
+```php
+$_SESSION['username'] = 'Guest'; // Assign 'Guest' as the username
+$_SESSION['user_id'] = 3;        // Use 0 as the guest user ID
+$_SESSION['role'] = 'Guest';     // Set the role to 'Guest'
+```
+#### b. Implementing secure session management.
+   - Implemented on [security_config.php](Enhanced/security_config.php), using ``startSecureSession()``, Ensures setting secure cookie parameters and regenerating the session ID to prevent session fixation attacks.
+   - Thus, In order to implemented to other pages, it need to include ``security_config.php`` at the Beginning of Each Page. This will initialize the secure session and set the necessary security headers of that pages. 
+     
+```php
+function startSecureSession() {
+    if (session_status() === PHP_SESSION_NONE) {
+        
+        ini_set('session.use_only_cookies', 1);
+        
+        $cookieParams = session_get_cookie_params();
+        session_set_cookie_params([
+            'lifetime' => $cookieParams["lifetime"],
+            'path' => $cookieParams["path"],
+            'domain' => $_SERVER['HTTP_HOST'],  
+            'secure' => isset($_SERVER['HTTPS']),  
+            'httponly' => true,
+            'samesite' => 'Strict'
+        ]);
+
+        session_start();
+        session_regenerate_id(true);  
+    }
+}
+```
+#### c. Implementing server side authorization.
+   - Checks the role of the user for each page. If the role are permissable then it can access the page. It will always checks the role on the database. For example:
+     
+```php
+// Check if the user is logged in and has the 'User' or 'Admin' role
+if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['User', 'Admin'])) {
+    // If not a user or admin, redirect to an unauthorized access page
+    echo "<script>alert('You are not authorized to access this page. Please Sign in');</script>";
+    exit();
+}
+```
+The session checks are include at each important pages such as:
+ - [booking.php](Enhanced/booking.php)
+ - [booking_crud.php](Enhanced/booking_crud.php)
+  
 ### 3.Input Validation
 a. Enhanced the booking form 
 - Implement the regex for the booking for all the input.
@@ -119,6 +165,9 @@ a. implement the code that enables the right-click for login and registration pa
     }
 </script>
 ```
+
+b. Adding the robots.txt
+- 'robots.txt' is to make sure that web crawlers cannot request from our site. 
 
 
 ### Weekly Progress Report
