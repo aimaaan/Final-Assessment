@@ -4,9 +4,14 @@ RewriteBase /INFO4345/Final-Assessment/Enhanced/
 # URL rewriting rules for pages
 RewriteRule ^login/?$ index.php [L,NC]
 RewriteRule ^home/?$ main.php [L,NC]
+RewriteRule ^booking/?$ booking.php [L,NC]
+RewriteRule ^room/?$ Room.php [L,NC]
+RewriteRule ^facility/?$ Facility.php [L,NC]
+RewriteRule ^about-us/?$ About%20Us.php [L,NC]
+RewriteRule ^contact/?$ Contact.php [L,NC]
 RewriteRule ^registration/?$ registration.php [L,NC]
+RewriteRule ^booking-crud/?$ booking.crud [L,NC]
 RewriteRule ^logout/?$ logout.php [L,NC]
-
 
 # URL rewriting rules for static assets
 RewriteRule ^styles/(.+\.(css|styles))$ styles/$1 [L,NC]
