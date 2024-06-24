@@ -75,7 +75,7 @@ unset($_SESSION['error']);
                     <input type="text" class="form-control" id="username" name="username" pattern="[a-zA-Z0-9_]{3,20}$" autocomplete="off" required> <br>
 
                     <label for="password">Password:</label>
-                    <input type="password" class="form-control" id="password" name="password" autocomplete="off" required><br>
+                    <input type="password" class="form-control" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$" autocomplete="off" required><br>
 
                     <div class="form-group">
                         <label for="google2fa_code">Verify:</label>
@@ -91,7 +91,7 @@ unset($_SESSION['error']);
                     <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($guest_csrf_token, ENT_QUOTES, 'UTF-8'); ?>">
                     <button type="submit" class="btn btn-secondary w-100 mt-3">Continue as Guest</button>
                 </form>
-                
+
             </div>
         </section>
     </section>

@@ -54,7 +54,7 @@ $qrCodeUrl = GoogleQrUrl::generate($_SESSION['username'], $google2fa_secret, 'Fl
                 <form action="qr_verify.php" method="POST">
                     <div class="mb-3">
                         <label for="google2fa_code" class="form-label">2FA Code:</label>
-                        <input type="text" name="google2fa_code" class="form-control" id="google2fa_code" placeholder="Enter 2FA Code" required>
+                        <input type="text" name="google2fa_code" class="form-control" id="google2fa_code" placeholder="Enter 2FA Code" autocomplete="off" required>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Verify</button>
                 </form>
