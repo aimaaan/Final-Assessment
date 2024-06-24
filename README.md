@@ -127,6 +127,9 @@ a. implement the code that enables the right-click for login and registration pa
 </script>
 ```
 
+b. Adding the robots.txt
+- 'robots.txt' is to make sure that web crawlers cannot request from our site. 
+
 
 ### Weekly Progress Report
 [Weekly Progress Report - Google Docs.pdf](https://github.com/user-attachments/files/15954439/Weekly.Progress.Report.-.Google.Docs.pdf)
