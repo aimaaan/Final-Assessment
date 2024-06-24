@@ -106,19 +106,19 @@ a. Implementing user authorisation by using role-based access control(RBAC) on d
 ### 3.Input Validation
 a. Enhanced the booking form 
 - Implement the regex for the booking for all the input.
-- User need to enter all the data required by the form before submitted it follows the regex. 
+- User need to enter all the data required by the form before submitting it following the regex. 
 - When all the inputs are validated, it will go to the database. 
 
 ### 4. File Security principles
 a. implement the code that enables the right-click for login and registration pages.
-- This 
-...
+- 
+ ```php
 <script>
     window.oncontextmenu = function() {
         return false;
     }
 </script>
-...
+```
 
 
 ### Weekly Progress Report
