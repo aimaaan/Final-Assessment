@@ -1,3 +1,7 @@
+<?php
+    require 'session_checks.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
