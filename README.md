@@ -154,6 +154,8 @@ The session checks are include at each important pages such as:
    - There are also logout at nav bar to allow user to logout with a single click and invalidate any active session and contents. it uses [logout.php](Enhanced/logout.php) to destroy session everytime user logout.
      
 #### d. Implementing httponly flag and destroying invalidated session id
+   - Implemented on [security_config.php](Enhanced/security_config.php), set the ``httponly = true;`` to Ensure all cookies, including session cookies, use the HttpOnly flag.
+   - Destroying session Id are also enable on everytime user logged out. using ``session_destroy()`` and ``session_unset();`` in [logout.php](Enhanced/logout.php) 
 
 ### 3.Input Validation
 a. Enhanced the booking form 
@@ -163,7 +165,7 @@ a. Enhanced the booking form
 
 ### 4. File Security principles
 a. implement the code that enables the right-click for login and registration pages.
-- 
+
  ```php
 <script>
     window.oncontextmenu = function() {
