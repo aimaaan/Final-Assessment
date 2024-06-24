@@ -102,7 +102,7 @@ a. Implementing user authorisation by using role-based access control(RBAC) on d
    - admin able to access admin dashboard pages and can create, read, update and delete user booking form -> [booking_crud.php](Enhanced/booking_crud.php)
    - user able to access all main pages of the flower hotel website including submit the booking form.
    - guest can login without authentication when click login as guest however, guest role is unable to submit the booking form. Only user are given permission to do so.
-   - When log in as guest, guest are given by default it session variavle which are username, userid and role. As shown code snippet below:
+   - When log in as guest, guest are given by default its session variable which are username, userid and role. As shown code snippet below:
 
 ```php
 $_SESSION['username'] = 'Guest'; // Assign 'Guest' as the username
