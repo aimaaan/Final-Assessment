@@ -1,8 +1,8 @@
 <?php
-require 'db.php';'
-require 'security_config.php';
+session_start();  // This should be at the very beginning
 
-session_start();
+require 'db.php';
+require 'security_config.php';
 
 // CSRF Token Generation and Validation
 if (empty($_SESSION['csrf_token'])) {
