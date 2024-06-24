@@ -148,18 +148,18 @@ if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['User', 'Admin
 The session checks are include at each important pages such as:
  - [booking.php](Enhanced/booking.php)
  - [booking_crud.php](Enhanced/booking_crud.php)
-  
-### 3.Input Validation
-a. Enhanced the booking form 
-- Implement the regex for the booking for all the input.
-- User need to enter all the data required by the form before submitting it following the regex. 
-- When all the inputs are validated, it will go to the database.
 
 #### c. Implementing regenerating session ids on Authentication and logging out
    - using ``startSecureSession()`` function on [security_config.php](Enhanced/security_config.php), it can also regenerate session id for every new login to avoid reuse the same sessionIDs.
    - There are also logout at nav bar to allow user to logout with a single click and invalidate any active session and contents. it uses [logout.php](Enhanced/logout.php) to destroy session everytime user logout.
      
 #### d. Implementing httponly flag and destroying invalidated session id
+
+### 3.Input Validation
+a. Enhanced the booking form 
+- Implement the regex for the booking for all the input.
+- User need to enter all the data required by the form before submitting it following the regex. 
+- When all the inputs are validated, it will go to the database.
 
 ### 4. File Security principles
 a. implement the code that enables the right-click for login and registration pages.
