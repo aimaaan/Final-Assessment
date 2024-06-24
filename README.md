@@ -41,7 +41,7 @@ Improved version of Flower Hotel web app with security features added onto the o
 ## Enhancement
 The authors of the file additions/enhancements are encased in square brackets as such: 
 - [aiman] refers to [Ahmad Arif Aiman bin Ahmad Fauzi](https://github.com/aimaaan)
-- [Nasrullah] refers to 
+- [Nasrullah] refers to [https://github.com/MuhdNasrullah]
 - [zafran] refers to [Muhammad Zafran bin Zamani](https://github.com/zafranzamani)
 
 ### 1. Authentication [aiman]
